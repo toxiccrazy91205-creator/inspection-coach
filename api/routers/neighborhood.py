@@ -21,8 +21,19 @@ def _parquet_path():
     return p
 
 
-@router.get("/neighborhood")
-def neighborhood(zip: str = Query(..., min_length=5, max_length=5), limit: int = 30):
+@router.get("/neighborhood", summary="List restaurants in a zip code by inspection risk")
+def neighborhood(
+    zip: str = Query(..., min_length=5, max_length=5, description="5-digit NYC zip code"),
+    limit: int = Query(default=30, description="Maximum number of restaurants to return (default 30)"),
+):
+    """
+    Returns restaurants in the given NYC zip code, ranked by most recent inspection score
+    (highest / most risky first). Each result includes the restaurant's last grade, score,
+    inspection date, and days since last inspection.
+
+    Grades are inferred from the point score when not explicitly recorded (0–13 = A, 14–27 = B, 28+ = C).
+    Only the most recent inspection per restaurant is returned.
+    """
     p = _parquet_path()
     df = pd.read_parquet(p, columns=COLS)
     df = df[df["zipcode"].astype(str).str.strip() == zip.strip()].copy()

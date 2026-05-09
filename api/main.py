@@ -8,9 +8,26 @@ from api.routers.admin import router as admin_router
 from api.routers.neighborhood import router as neighborhood_router
 
 app = FastAPI(
-    title="Health Inspection Compliance Coach",
+    title="DineSafe NYC",
     version="0.1.0",
-    description="Predict next inspection risk and likely violation categories."
+    description="""
+Predict any NYC restaurant's next health inspection risk before the inspector shows up.
+
+**Data source:** NYC Department of Health restaurant inspection records via NYC Open Data,
+refreshed nightly. ~30,000 restaurants, ~296,000 inspection records.
+
+**Key endpoints:**
+- `POST /score` — risk prediction for a restaurant (by CAMIS)
+- `GET /search` — find restaurants by name
+- `GET /neighborhood` — rank all restaurants in a zip code by inspection risk
+- `GET /metadata` — data freshness info
+
+**Scoring:** heuristic-based (not ML-trained). Risk is derived from inspection history,
+score trend, borough baseline, critical violation rate, and local rodent pressure index.
+
+**Rat pressure index:** geospatial composite built from 311 rodent complaints and DOHMH
+rat inspection failures within ~150–200m of each restaurant, using H3 hex cells (resolution 9).
+""",
 )
 
 # Primary CORS config
