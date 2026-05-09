@@ -61,8 +61,8 @@ def fetch_to_parquet(name: str = "inspections_raw") -> int:
                 writer = pq.ParquetWriter(tmp_path, table.schema, compression="snappy")
             else:
                 # Reindex to match the established schema so column order is consistent
-                df = df.reindex(columns=[s.name for s in writer.schema_arrow], fill_value=None)
-                table = pa.Table.from_pandas(df, schema=writer.schema_arrow, preserve_index=False)
+                df = df.reindex(columns=[s.name for s in writer.schema], fill_value=None)
+                table = pa.Table.from_pandas(df, schema=writer.schema, preserve_index=False)
             writer.write_table(table)
 
             total += len(batch)
