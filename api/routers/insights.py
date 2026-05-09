@@ -1,5 +1,4 @@
 import os
-from datetime import date
 from functools import lru_cache
 import pandas as pd
 from fastapi import APIRouter, HTTPException
@@ -11,8 +10,7 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
-COLS = ["camis", "dba", "boro", "building", "street", "zipcode",
-        "cuisine_description", "inspection_date", "score", "grade"]
+COLS = ["camis", "inspection_date", "score", "grade"]
 
 
 def _parquet_path():
@@ -54,42 +52,9 @@ def _compute_insights():
     grade_counts = {g: int(counts.get(g, 0)) for g in ("A", "B", "C")}
     grade_counts["ungraded"] = int(total - sum(grade_counts.values()))
 
-    # Top 5 riskiest: highest score, must have a score
-    top = (
-        latest[latest["score"].notna()]
-        .sort_values("score", ascending=False)
-        .head(5)
-    )
-
-    today = date.today()
-    top_risky = []
-    for r in top.itertuples(index=False):
-        last_date = str(r.inspection_date)[:10] if pd.notna(r.inspection_date) else None
-        days_since = None
-        if last_date:
-            try:
-                days_since = (today - date.fromisoformat(last_date)).days
-            except Exception:
-                pass
-        top_risky.append({
-            "camis": str(r.camis),
-            "name": str(r.dba),
-            "address": " ".join(filter(None, [
-                str(r.building or "").strip(),
-                str(r.street or "").strip(),
-            ])),
-            "boro": str(r.boro or ""),
-            "cuisine": str(r.cuisine_description or ""),
-            "last_score": int(r.score),
-            "last_grade": r.grade_display,
-            "last_date": last_date,
-            "days_since": days_since,
-        })
-
     return {
         "total_restaurants": total,
         "grade_counts": grade_counts,
-        "top_risky": top_risky,
     }
 
 
