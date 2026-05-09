@@ -380,6 +380,7 @@ def score(req: ScoreRequest):
                 "last_grade": s["last_grade"],
                 "latitude": s.get("latitude"),
                 "longitude": s.get("longitude"),
+                "score_history": s.get("score_history", []),
             })
         payload = attach_rat(payload)
         return ScoreResponse(**payload)
@@ -404,6 +405,7 @@ def score(req: ScoreRequest):
             "last_grade": s["last_grade"],
             "latitude": s.get("latitude"),
             "longitude": s.get("longitude"),
+            "score_history": s.get("score_history", []),
         }
         payload = attach_rat(payload)
         return ScoreResponse(**payload)

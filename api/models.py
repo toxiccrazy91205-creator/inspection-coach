@@ -38,6 +38,8 @@ class ScoreResponse(BaseModel):
     # for map
     latitude: Optional[float] = None
     longitude: Optional[float] = None
+    # score history for chart: list of [date_str, score] pairs
+    score_history: List[List] = []
 
     # Silence "model_" protected namespace warning in Pydantic
     if _HAS_CONFIGDICT:
