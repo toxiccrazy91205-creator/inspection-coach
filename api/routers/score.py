@@ -236,30 +236,6 @@ def _safe_int(val):
         return None
 
 
-# Cuisine B/C risk adjustment derived from NYC inspection data (deviation from 7.8% mean)
-CUISINE_RISK_DELTA = {
-    # Very high risk (≥15% B/C rate)
-    "Korean": +0.08, "Fusion": +0.07, "Greek": +0.07,
-    "Asian/Asian Fusion": +0.07, "Southeast Asian": +0.07,
-    "Indian": +0.07, "Jewish/Kosher": +0.06, "Thai": +0.06,
-    "African": +0.06,
-    # High risk (10–15%)
-    "Latin American": +0.05, "Chinese": +0.05, "Caribbean": +0.04,
-    "Pizza": +0.04, "Middle Eastern": +0.04, "Eastern European": +0.04,
-    "Peruvian": +0.04,
-    # Moderate (7–10%)
-    "Mexican": +0.02, "Mediterranean": +0.02, "Japanese": +0.02,
-    "Spanish": +0.01,
-    # Low risk (3–6%)
-    "Juice, Smoothies, Fruit Salads": -0.02, "Sandwiches": -0.02,
-    "Bakery Products/Desserts": -0.02, "Sandwiches/Salads/Mixed Buffet": -0.02,
-    "Steakhouse": -0.02, "Irish": -0.03, "New American": -0.03,
-    "French": -0.04,
-    # Very low risk (<3%)
-    "Coffee/Tea": -0.05, "Donuts": -0.07, "Hamburgers": -0.07,
-    "Salads": -0.07, "Bagels/Pretzels": -0.07,
-}
-
 # Borough B/C risk adjustment derived from NYC inspection data (deviation from 7.8% mean)
 BORO_RISK_DELTA = {
     "Queens": +0.03,
@@ -277,7 +253,6 @@ def _heuristic_from_summary(s) -> tuple:
     days_since = s.get("days_since_last")
     inspection_count = s.get("inspection_count", 1)
     recurrence = s.get("recurrence", {})
-    cuisine = s.get("cuisine")
     boro = s.get("boro")
     critical_fraction = s.get("critical_fraction", 0.0)
     consec_a = s.get("consec_a", 0)
@@ -329,15 +304,6 @@ def _heuristic_from_summary(s) -> tuple:
     elif consec_a == 2:
         prob_bc = max(0.04, prob_bc - 0.04)
         reasons.append("Consistent A history (2 consecutive)")
-
-    # --- cuisine type risk ---
-    if cuisine and cuisine in CUISINE_RISK_DELTA:
-        delta = CUISINE_RISK_DELTA[cuisine]
-        prob_bc = min(0.95, max(0.04, prob_bc + delta))
-        if delta >= 0.04:
-            reasons.append(f"Higher-risk cuisine type ({cuisine})")
-        elif delta <= -0.04:
-            reasons.append(f"Lower-risk cuisine type ({cuisine})")
 
     # --- borough risk ---
     if boro and boro in BORO_RISK_DELTA:
