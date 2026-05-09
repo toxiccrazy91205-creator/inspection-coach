@@ -10,8 +10,15 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
-@router.get("/search")
-def search(name: str = Query(..., min_length=2)):
+@router.get("/search", summary="Search restaurants by name")
+def search(name: str = Query(..., min_length=2, description="Partial restaurant name — minimum 2 characters, case-insensitive")):
+    """
+    Search for NYC restaurants by name. Returns up to 25 matches.
+
+    Results are deduplicated by CAMIS (one row per restaurant) and sorted alphabetically.
+    The search is a case-insensitive substring match against the restaurant's registered name
+    in the NYC inspection dataset.
+    """
     # Use runtime-refreshed parquet if available; else baked parquet from the image
     raw_file = RAW_FILE_RUNTIME if os.path.exists(RAW_FILE_RUNTIME) else RAW_FILE_BAKED
     if not os.path.exists(raw_file):

@@ -379,8 +379,23 @@ def _heuristic_from_summary(s) -> tuple:
     return prob_bc, predicted_points, reasons, top_vios
 
 
-@router.post("/score", response_model=ScoreResponse)
+@router.post("/score", response_model=ScoreResponse, summary="Get risk score for a restaurant")
 def score(req: ScoreRequest):
+    """
+    Returns a risk prediction for the given NYC restaurant (identified by CAMIS).
+
+    **Scoring approach:** heuristic-based (not ML-trained). The `prob_bc` field is the
+    estimated probability of receiving a B or C grade on the next inspection, derived from:
+    - Last inspection score and grade
+    - Score trend across inspection history
+    - Consecutive clean A-grade streak
+    - Borough-level risk adjustment
+    - Critical violation fraction at last visit
+    - Local rodent pressure index (rat_index)
+
+    For the 25 pre-seeded demo restaurants the response is returned from an in-memory cache
+    (~1 ms). All other restaurants are scored live from the inspection parquet (~50–200 ms).
+    """
     camis = str(req.camis)
 
     def attach_rat(payload: dict) -> dict:

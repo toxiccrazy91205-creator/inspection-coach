@@ -1,7 +1,7 @@
 # api/routers/admin.py
 import os
 import threading
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Query
 
 from api.routers.score import model_service
 
@@ -45,8 +45,19 @@ def _run_refresh():
     _refresh_status["last"] = steps
 
 
-@router.post("/admin/refresh")
-def refresh(x_admin_token: str = Header(default="")):
+@router.post("/admin/refresh", summary="Trigger a full data refresh (admin only)")
+def refresh(x_admin_token: str = Header(default="", description="Admin token — must match the ADMIN_TOKEN environment variable")):
+    """
+    Triggers a background refresh of the NYC inspection dataset and rat pressure index.
+
+    Fetches all ~296k inspection records from NYC Open Data, rebuilds the rat pressure index
+    from 311 rodent complaints and DOHMH rat inspection data, then reloads the in-memory
+    feature store so `/score` immediately uses the latest data.
+
+    Requires the `X-Admin-Token` header. Returns immediately — the refresh runs in a background
+    thread. Poll `/admin/refresh/status` to check progress. Called nightly at 03:00 UTC by
+    Cloud Scheduler.
+    """
     if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
@@ -58,8 +69,9 @@ def refresh(x_admin_token: str = Header(default="")):
     return {"ok": True, "message": "Refresh started in background — call /admin/refresh/status to check progress"}
 
 
-@router.get("/admin/refresh/status")
-def refresh_status(x_admin_token: str = Header(default="")):
+@router.get("/admin/refresh/status", summary="Check background refresh status (admin only)")
+def refresh_status(x_admin_token: str = Header(default="", description="Admin token")):
+    """Returns whether a refresh is currently running and the result of the last completed refresh."""
     if not ADMIN_TOKEN or x_admin_token != ADMIN_TOKEN:
         raise HTTPException(status_code=401, detail="Unauthorized")
     return {
@@ -68,8 +80,9 @@ def refresh_status(x_admin_token: str = Header(default="")):
     }
 
 
-@router.get("/admin/ratpeek")
-def ratpeek(camis: str):
+@router.get("/admin/ratpeek", summary="Debug: rat features for a CAMIS")
+def ratpeek(camis: str = Query(..., description="NYC CAMIS identifier")):
+    """Debug helper: check whether a given CAMIS has rat pressure features loaded in-memory."""
     v = model_service.rat_features.get(str(camis))
     return {
         "feature_dir": os.getenv("FEATURE_STORE_DIR", "./data/parquet"),

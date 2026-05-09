@@ -2,56 +2,50 @@
 from typing import List, Optional
 
 try:
-    # Pydantic v2 style
-    from pydantic import BaseModel, ConfigDict
+    from pydantic import BaseModel, ConfigDict, Field
     _HAS_CONFIGDICT = True
 except Exception:
-    from pydantic import BaseModel  # type: ignore
+    from pydantic import BaseModel, Field  # type: ignore
     _HAS_CONFIGDICT = False
 
 
 class ViolationProb(BaseModel):
-    code: str
-    probability: float
-    label: str
+    code: str = Field(description="NYC violation code (e.g. '04L')")
+    probability: float = Field(description="Estimated probability this violation recurs on the next inspection (0–1)")
+    label: str = Field(description="Human-readable description of the violation")
+
 
 class LastViolation(BaseModel):
-    code: str
-    description: str
-    critical: bool
+    code: str = Field(description="NYC violation code (e.g. '04L')")
+    description: str = Field(description="Full text description of the violation as recorded by the inspector")
+    critical: bool = Field(description="True if the violation was flagged Critical by the inspector")
 
 
 class ScoreRequest(BaseModel):
-    camis: str
+    camis: str = Field(description="NYC CAMIS identifier — the unique ID assigned to each restaurant by the city")
 
 
 class ScoreResponse(BaseModel):
-    camis: str
-    prob_bc: float
-    predicted_points: Optional[float] = None
-    top_reasons: List[str] = []
-    top_violation_probs: List[ViolationProb] = []
-    model_version: Optional[str] = None
-    data_version: Optional[str] = None
-    last_inspection_date: Optional[str] = None
-    last_points: Optional[float] = None
-    last_grade: Optional[str] = None
-    # NEW rat features
-    rat_index: Optional[float] = None
-    rat311_cnt_180d_k1: Optional[int] = None
-    ratinsp_fail_365d_k1: Optional[int] = None
-    # for map
-    latitude: Optional[float] = None
-    longitude: Optional[float] = None
-    # score history for chart: list of [date_str, score] pairs
-    score_history: List[List] = []
-    last_violations: List[LastViolation] = []
+    camis: str = Field(description="NYC CAMIS identifier")
+    prob_bc: float = Field(description="Predicted probability (0–1) of receiving a B or C grade on the next inspection")
+    predicted_points: Optional[float] = Field(default=None, description="Predicted violation point total for the next inspection")
+    top_reasons: List[str] = Field(default=[], description="Plain-language factors that drove the risk score")
+    top_violation_probs: List[ViolationProb] = Field(default=[], description="Violation categories most likely to recur, based on inspection history")
+    model_version: Optional[str] = Field(default=None, description="Identifier for the scoring model or heuristic version used")
+    data_version: Optional[str] = Field(default=None, description="Source of the data used ('runtime' = live-refreshed, 'baked' = image fallback)")
+    last_inspection_date: Optional[str] = Field(default=None, description="Date of the most recent recorded inspection (YYYY-MM-DD)")
+    last_points: Optional[float] = Field(default=None, description="Violation point total from the most recent inspection")
+    last_grade: Optional[str] = Field(default=None, description="Letter grade from the most recent inspection (A, B, or C), inferred from points if not explicitly recorded")
+    rat_index: Optional[float] = Field(default=None, description="Composite rodent pressure score (0–1) based on nearby 311 complaints and failed city rat inspections. Buckets: Low <0.2, Moderate 0.2–0.4, Elevated 0.4–0.6, High 0.6–0.8, Very High ≥0.8")
+    rat311_cnt_180d_k1: Optional[int] = Field(default=None, description="Number of 311 rodent complaints filed within ~150–200m of this restaurant in the last 180 days")
+    ratinsp_fail_365d_k1: Optional[int] = Field(default=None, description="Number of failed DOHMH rat inspections at properties within ~150–200m in the last 365 days")
+    latitude: Optional[float] = Field(default=None, description="Latitude of the restaurant (WGS84)")
+    longitude: Optional[float] = Field(default=None, description="Longitude of the restaurant (WGS84)")
+    score_history: List[List] = Field(default=[], description="Chronological list of [date, points] pairs across all recorded inspections, suitable for rendering a trend chart")
+    last_violations: List[LastViolation] = Field(default=[], description="All violations cited at the most recent inspection, sorted critical-first then by violation code")
 
-    # Silence "model_" protected namespace warning in Pydantic
     if _HAS_CONFIGDICT:
         model_config = ConfigDict(protected_namespaces=())
-    else:  # v1 fallback
+    else:
         class Config:  # type: ignore
             protected_namespaces = ()
-
-
