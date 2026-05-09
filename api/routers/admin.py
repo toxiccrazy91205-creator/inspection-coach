@@ -23,12 +23,20 @@ def refresh(x_admin_token: str = Header(default="")):
 
     steps: list[str] = []
 
-    # 1) Your inspections/seed step (keep as-is or plug in your ETL)
+    # 1) Refresh inspections parquet from NYC Open Data
     try:
-        # e.g., nightly_refresh_inspections()
-        steps.append("inspections_seed_ok")
+        from etl.nyc_inspections_etl import fetch, write_parquet
+        df = fetch()
+        if df.empty:
+            steps.append("inspections_empty_response")
+        else:
+            write_parquet(df, "inspections_raw")
+            steps.append(f"inspections_ok:{len(df)}_rows")
+            # Invalidate per-CAMIS LRU cache so /score sees fresh data
+            from api.routers.score import _latest_visit_summary
+            _latest_visit_summary.cache_clear()
     except Exception as e:
-        steps.append(f"inspections_seed_failed: {e}")
+        steps.append(f"inspections_failed:{e}")
 
     # 2) Build rat features (writes to FEATURE_STORE_DIR)
     try:
