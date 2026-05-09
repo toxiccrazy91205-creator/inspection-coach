@@ -1,21 +1,99 @@
-import os, httpx, pandas as pd
-from datetime import datetime, timedelta
+import os
+import httpx
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 BASE_URL = os.getenv("SOCRATA_BASE_URL", "https://data.cityofnewyork.us")
 DATASET = os.getenv("SOCRATA_DATASET_ID", "43nn-pn8j")
 FEATURE_DIR = os.getenv("FEATURE_STORE_DIR", "./data/parquet")
 
-def fetch(limit=300000) -> pd.DataFrame:
+# Only fetch columns the app actually uses — keeps each page small
+SELECT_COLS = ",".join([
+    "camis", "dba", "boro", "building", "street", "zipcode",
+    "cuisine_description", "inspection_date", "action",
+    "violation_code", "violation_description", "critical_flag",
+    "score", "grade", "grade_date", "inspection_type",
+    "latitude", "longitude",
+])
+
+PAGE_SIZE = 20_000
+
+
+def fetch_to_parquet(name: str = "inspections_raw") -> int:
+    """Stream the full NYC inspection dataset page-by-page directly to Parquet.
+    Keeps memory use bounded to one page (~20k rows) at a time."""
     url = f"{BASE_URL}/resource/{DATASET}.json"
     app_token = os.getenv("NYC_APP_TOKEN", "")
-    params = {"$limit": limit, "$order": "inspection_date DESC"}
     headers = {"X-App-Token": app_token} if app_token else {}
-    r = httpx.get(url, params=params, headers=headers, timeout=180)
+
+    os.makedirs(FEATURE_DIR, exist_ok=True)
+    path = os.path.join(FEATURE_DIR, f"{name}.parquet")
+    tmp_path = path + ".tmp"
+
+    writer = None
+    offset = 0
+    total = 0
+
+    try:
+        while True:
+            params = {
+                "$select": SELECT_COLS,
+                "$limit": PAGE_SIZE,
+                "$offset": offset,
+                "$order": "camis,inspection_date",
+            }
+            r = httpx.get(url, params=params, headers=headers, timeout=90)
+            r.raise_for_status()
+            batch = r.json()
+            if not batch:
+                break
+
+            df = pd.DataFrame(batch)
+            if "inspection_date" in df.columns:
+                df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
+            for col in ["score"]:
+                if col in df.columns:
+                    df[col] = pd.to_numeric(df[col], errors="coerce")
+
+            table = pa.Table.from_pandas(df, preserve_index=False)
+            if writer is None:
+                writer = pq.ParquetWriter(tmp_path, table.schema, compression="snappy")
+            writer.write_table(table)
+
+            total += len(batch)
+            offset += PAGE_SIZE
+            print(f"  fetched {total} rows...", flush=True)
+
+            if len(batch) < PAGE_SIZE:
+                break
+    finally:
+        if writer:
+            writer.close()
+
+    # Atomically replace the old parquet once fully written
+    if total > 0:
+        os.replace(tmp_path, path)
+        print(f"Wrote {total} rows to {path}")
+    elif os.path.exists(tmp_path):
+        os.remove(tmp_path)
+
+    return total
+
+
+# Legacy single-shot helpers kept for compatibility
+def fetch(limit=50_000) -> pd.DataFrame:
+    url = f"{BASE_URL}/resource/{DATASET}.json"
+    app_token = os.getenv("NYC_APP_TOKEN", "")
+    headers = {"X-App-Token": app_token} if app_token else {}
+    params = {"$select": SELECT_COLS, "$limit": limit, "$order": "inspection_date DESC"}
+    r = httpx.get(url, params=params, headers=headers, timeout=90)
     r.raise_for_status()
     df = pd.DataFrame(r.json())
     if not df.empty and "inspection_date" in df.columns:
         df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
     return df
+
 
 def write_parquet(df: pd.DataFrame, name: str):
     os.makedirs(FEATURE_DIR, exist_ok=True)
@@ -23,9 +101,6 @@ def write_parquet(df: pd.DataFrame, name: str):
     df.to_parquet(path, index=False)
     print(f"Wrote {len(df)} rows to {path}")
 
+
 if __name__ == "__main__":
-    df = fetch()
-    if df.empty:
-        print("No rows fetched. Check dataset id / query.")
-    else:
-        write_parquet(df, "inspections_raw")
+    fetch_to_parquet()

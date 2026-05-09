@@ -16,13 +16,12 @@ _refresh_status: dict = {"running": False, "last": None}
 def _run_refresh():
     steps: list[str] = []
     try:
-        from etl.nyc_inspections_etl import fetch, write_parquet
-        df = fetch()
-        if df.empty:
+        from etl.nyc_inspections_etl import fetch_to_parquet
+        total = fetch_to_parquet()
+        if total == 0:
             steps.append("inspections_empty_response")
         else:
-            write_parquet(df, "inspections_raw")
-            steps.append(f"inspections_ok:{len(df)}_rows")
+            steps.append(f"inspections_ok:{total}_rows")
             from api.routers.score import _latest_visit_summary
             _latest_visit_summary.cache_clear()
     except Exception as e:
