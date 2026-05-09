@@ -20,7 +20,6 @@ RUN pip install --no-cache-dir -r /app/api/requirements.txt \
 # App code
 COPY api /app/api
 COPY etl /app/etl
-COPY models /app/models
 COPY data /app/data
 
 # Bake feature store (so we have a cold-start fallback)
