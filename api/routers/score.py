@@ -114,6 +114,17 @@ def _latest_visit_summary(camis: str):
             lat = lat if lat is not None else lat2
             lon = lon if lon is not None else lon2
 
+    cuisine = (
+        str(last["cuisine_description"]).strip()
+        if "cuisine_description" in df.columns and pd.notna(last.get("cuisine_description"))
+        else None
+    )
+    boro = (
+        str(last["boro"]).strip()
+        if "boro" in df.columns and pd.notna(last.get("boro"))
+        else None
+    )
+
     same_visit = df[df["inspection_date"] == last["inspection_date"]] if "inspection_date" in df.columns else df.tail(1)
 
     labels_by_code: dict = {}
@@ -134,28 +145,47 @@ def _latest_visit_summary(camis: str):
             label = labels_by_code.get(code) or CODE_LABELS.get(code) or f"Violation {code}"
             vio_counts.append((code, int(cnt), label))
 
-    # --- NEW: score history across distinct inspection dates ---
+    # Critical flag fraction for last visit
+    critical_fraction: float = 0.0
+    if not same_visit.empty and "critical_flag" in same_visit.columns:
+        flags = same_visit["critical_flag"].dropna()
+        if len(flags):
+            critical_fraction = float((flags == "Critical").sum()) / len(flags)
+
+    # Score history and grade history across distinct inspection dates
     score_history: list = []
+    grade_history: list = []
     inspection_count = 1
     recurrence: dict = {}
 
-    if "inspection_date" in df.columns and "score" in df.columns:
-        # one row per inspection date (take the max score per date — most informative)
-        by_date = (
-            df.dropna(subset=["inspection_date"])
-            .groupby("inspection_date")["score"]
-            .apply(lambda s: _safe_int(s.dropna().iloc[0]) if not s.dropna().empty else None)
-            .reset_index()
-            .sort_values("inspection_date")
-        )
-        score_history = [
-            (str(r["inspection_date"])[:10], r["score"])
-            for _, r in by_date.iterrows()
-            if r["score"] is not None
-        ]
-        inspection_count = len(by_date)
+    if "inspection_date" in df.columns:
+        dated = df.dropna(subset=["inspection_date"]).sort_values("inspection_date")
 
-        # recurrence: count distinct inspection dates each violation code appeared in
+        if "score" in df.columns:
+            by_date = (
+                dated.groupby("inspection_date")["score"]
+                .apply(lambda s: _safe_int(s.dropna().iloc[0]) if not s.dropna().empty else None)
+                .reset_index()
+            )
+            score_history = [
+                (str(r["inspection_date"])[:10], r["score"])
+                for _, r in by_date.iterrows()
+                if r["score"] is not None
+            ]
+            inspection_count = len(by_date)
+
+        if "grade" in df.columns:
+            by_date_g = (
+                dated[dated["grade"].isin(["A", "B", "C"])]
+                .groupby("inspection_date")["grade"]
+                .first()
+                .reset_index()
+            )
+            grade_history = [
+                (str(r["inspection_date"])[:10], str(r["grade"]))
+                for _, r in by_date_g.iterrows()
+            ]
+
         if "violation_code" in df.columns:
             recurrence = (
                 df.dropna(subset=["violation_code", "inspection_date"])
@@ -164,7 +194,15 @@ def _latest_visit_summary(camis: str):
                 .to_dict()
             )
 
-    # days since last inspection
+    # Consecutive A grades at end of grade history
+    consec_a = 0
+    for _, g in reversed(grade_history):
+        if g == "A":
+            consec_a += 1
+        else:
+            break
+
+    # Days since last inspection
     days_since_last = None
     if last_date:
         try:
@@ -176,10 +214,15 @@ def _latest_visit_summary(camis: str):
         "last_date": last_date,
         "last_score": last_score,
         "last_grade": last_grade,
+        "cuisine": cuisine,
+        "boro": boro,
+        "critical_fraction": critical_fraction,
+        "consec_a": consec_a,
         "vio_counts": vio_counts,
         "latitude": lat,
         "longitude": lon,
         "score_history": score_history,
+        "grade_history": grade_history,
         "inspection_count": inspection_count,
         "days_since_last": days_since_last,
         "recurrence": recurrence,
@@ -193,6 +236,40 @@ def _safe_int(val):
         return None
 
 
+# Cuisine B/C risk adjustment derived from NYC inspection data (deviation from 7.8% mean)
+CUISINE_RISK_DELTA = {
+    # Very high risk (≥15% B/C rate)
+    "Korean": +0.08, "Fusion": +0.07, "Greek": +0.07,
+    "Asian/Asian Fusion": +0.07, "Southeast Asian": +0.07,
+    "Indian": +0.07, "Jewish/Kosher": +0.06, "Thai": +0.06,
+    "African": +0.06,
+    # High risk (10–15%)
+    "Latin American": +0.05, "Chinese": +0.05, "Caribbean": +0.04,
+    "Pizza": +0.04, "Middle Eastern": +0.04, "Eastern European": +0.04,
+    "Peruvian": +0.04,
+    # Moderate (7–10%)
+    "Mexican": +0.02, "Mediterranean": +0.02, "Japanese": +0.02,
+    "Spanish": +0.01,
+    # Low risk (3–6%)
+    "Juice, Smoothies, Fruit Salads": -0.02, "Sandwiches": -0.02,
+    "Bakery Products/Desserts": -0.02, "Sandwiches/Salads/Mixed Buffet": -0.02,
+    "Steakhouse": -0.02, "Irish": -0.03, "New American": -0.03,
+    "French": -0.04,
+    # Very low risk (<3%)
+    "Coffee/Tea": -0.05, "Donuts": -0.07, "Hamburgers": -0.07,
+    "Salads": -0.07, "Bagels/Pretzels": -0.07,
+}
+
+# Borough B/C risk adjustment derived from NYC inspection data (deviation from 7.8% mean)
+BORO_RISK_DELTA = {
+    "Queens": +0.03,
+    "Bronx": +0.01,
+    "Brooklyn": -0.01,
+    "Staten Island": -0.01,
+    "Manhattan": -0.02,
+}
+
+
 def _heuristic_from_summary(s) -> tuple:
     last_score = s["last_score"]
     last_grade = s["last_grade"]
@@ -200,6 +277,10 @@ def _heuristic_from_summary(s) -> tuple:
     days_since = s.get("days_since_last")
     inspection_count = s.get("inspection_count", 1)
     recurrence = s.get("recurrence", {})
+    cuisine = s.get("cuisine")
+    boro = s.get("boro")
+    critical_fraction = s.get("critical_fraction", 0.0)
+    consec_a = s.get("consec_a", 0)
 
     # --- base prob from last score ---
     if last_score is not None:
@@ -223,11 +304,11 @@ def _heuristic_from_summary(s) -> tuple:
     if last_grade and f"Last grade: {last_grade}" not in reasons:
         reasons.append(f"Last grade: {last_grade}")
 
-    # --- score trend: adjust based on last 3 inspections ---
+    # --- score trend ---
     scores = [sc for _, sc in score_history if sc is not None]
     if len(scores) >= 2:
         recent, prior = scores[-1], scores[-2]
-        delta = recent - prior  # positive = worsening, negative = improving
+        delta = recent - prior
         if delta >= 10:
             prob_bc = min(0.95, prob_bc + 0.12)
             reasons.append(f"Score worsening ({prior}→{recent})")
@@ -241,10 +322,44 @@ def _heuristic_from_summary(s) -> tuple:
             prob_bc = max(0.05, prob_bc - 0.06)
             reasons.append(f"Score trending down ({prior}→{recent})")
 
+    # --- consecutive clean A grades ---
+    if consec_a >= 3:
+        prob_bc = max(0.04, prob_bc - 0.08)
+        reasons.append(f"Consistent A history ({consec_a} consecutive)")
+    elif consec_a == 2:
+        prob_bc = max(0.04, prob_bc - 0.04)
+        reasons.append("Consistent A history (2 consecutive)")
+
+    # --- cuisine type risk ---
+    if cuisine and cuisine in CUISINE_RISK_DELTA:
+        delta = CUISINE_RISK_DELTA[cuisine]
+        prob_bc = min(0.95, max(0.04, prob_bc + delta))
+        if delta >= 0.04:
+            reasons.append(f"Higher-risk cuisine type ({cuisine})")
+        elif delta <= -0.04:
+            reasons.append(f"Lower-risk cuisine type ({cuisine})")
+
+    # --- borough risk ---
+    if boro and boro in BORO_RISK_DELTA:
+        delta = BORO_RISK_DELTA[boro]
+        prob_bc = min(0.95, max(0.04, prob_bc + delta))
+        if abs(delta) >= 0.02:
+            direction = "higher" if delta > 0 else "lower"
+            reasons.append(f"{boro} restaurants trend {direction}-risk")
+
+    # --- critical violations ---
+    if critical_fraction == 0:
+        prob_bc = max(0.04, prob_bc - 0.04)
+        reasons.append("No critical violations in last inspection")
+    elif critical_fraction > 0.67:
+        prob_bc = min(0.95, prob_bc + 0.04)
+        reasons.append("Majority of violations were critical")
+    elif critical_fraction > 0.33:
+        prob_bc = min(0.95, prob_bc + 0.01)
+
     # --- days since last inspection ---
     if days_since is not None:
         if days_since > 540:
-            # Very overdue — pull toward the population mean (~35%)
             prob_bc = 0.4 * prob_bc + 0.6 * 0.35
             reasons.append(f"Not inspected in {days_since} days")
         elif days_since > 365:
@@ -316,7 +431,7 @@ def score(req: ScoreRequest):
             "predicted_points": float(predicted_points),
             "top_reasons": reasons,
             "top_violation_probs": top_vios,
-            "model_version": "heuristic-v2",
+            "model_version": "heuristic-v3",
             "data_version": "runtime",
             "last_inspection_date": s["last_date"],
             "last_points": s["last_score"],
