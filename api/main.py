@@ -6,6 +6,7 @@ from api.routers.score import router as score_router
 from api.routers.search import router as search_router
 from api.routers.admin import router as admin_router
 from api.routers.neighborhood import router as neighborhood_router
+from api.routers.insights import router as insights_router
 
 app = FastAPI(
     title="DineSafe NYC",
@@ -20,6 +21,7 @@ refreshed nightly. ~30,000 restaurants, ~296,000 inspection records.
 - `POST /score` — risk prediction for a restaurant (by CAMIS)
 - `GET /search` — find restaurants by name
 - `GET /neighborhood` — rank all restaurants in a zip code by inspection risk
+- `GET /insights` — citywide grade distribution and top-5 riskiest restaurants
 - `GET /metadata` — data freshness info
 
 **Scoring:** heuristic-based (not ML-trained). Risk is derived from inspection history,
@@ -89,3 +91,4 @@ app.include_router(score_router, prefix="")
 app.include_router(search_router, prefix="")
 app.include_router(admin_router, prefix="")
 app.include_router(neighborhood_router, prefix="")
+app.include_router(insights_router, prefix="")

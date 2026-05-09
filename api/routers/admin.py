@@ -41,6 +41,13 @@ def _run_refresh():
     except Exception as e:
         steps.append(f"rat_reload_failed:{e}")
 
+    try:
+        from api.routers.insights import _compute_insights
+        _compute_insights.cache_clear()
+        steps.append("insights_cache_cleared")
+    except Exception as e:
+        steps.append(f"insights_cache_clear_failed:{e}")
+
     _refresh_status["running"] = False
     _refresh_status["last"] = steps
 
