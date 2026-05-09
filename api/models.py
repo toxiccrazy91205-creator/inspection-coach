@@ -15,6 +15,11 @@ class ViolationProb(BaseModel):
     probability: float
     label: str
 
+class LastViolation(BaseModel):
+    code: str
+    description: str
+    critical: bool
+
 
 class ScoreRequest(BaseModel):
     camis: str
@@ -40,6 +45,7 @@ class ScoreResponse(BaseModel):
     longitude: Optional[float] = None
     # score history for chart: list of [date_str, score] pairs
     score_history: List[List] = []
+    last_violations: List[LastViolation] = []
 
     # Silence "model_" protected namespace warning in Pydantic
     if _HAS_CONFIGDICT:

@@ -5,7 +5,7 @@ from functools import lru_cache
 from fastapi import APIRouter, HTTPException
 from typing import List
 
-from api.models import ScoreRequest, ScoreResponse, ViolationProb
+from api.models import ScoreRequest, ScoreResponse, ViolationProb, LastViolation
 from api.services.model_service import ModelService
 
 
@@ -146,6 +146,28 @@ def _latest_visit_summary(camis: str):
             label = labels_by_code.get(code) or CODE_LABELS.get(code) or f"Violation {code}"
             vio_counts.append((code, int(cnt), label))
 
+    # All violations from the last visit, deduplicated by code
+    # critical first, then non-critical, each group sorted by code
+    last_violations: list = []
+    if not same_visit.empty and "violation_code" in same_visit.columns:
+        tmp = same_visit.dropna(subset=["violation_code"]).copy()
+        tmp["violation_code"] = tmp["violation_code"].astype(str)
+        if "critical_flag" not in tmp.columns:
+            tmp["critical_flag"] = None
+        seen = set()
+        rows = []
+        for _, row in tmp.iterrows():
+            code = row["violation_code"]
+            if code in seen:
+                continue
+            seen.add(code)
+            desc = labels_by_code.get(code) or CODE_LABELS.get(code) or f"Violation {code}"
+            flag = str(row.get("critical_flag") or "").strip()
+            is_critical = flag == "Critical"
+            rows.append((code, desc, is_critical))
+        rows.sort(key=lambda r: (0 if r[2] else 1, r[0]))
+        last_violations = [{"code": c, "description": d, "critical": ic} for c, d, ic in rows]
+
     # Critical flag fraction for last visit
     critical_fraction: float = 0.0
     if not same_visit.empty and "critical_flag" in same_visit.columns:
@@ -220,6 +242,7 @@ def _latest_visit_summary(camis: str):
         "critical_fraction": critical_fraction,
         "consec_a": consec_a,
         "vio_counts": vio_counts,
+        "last_violations": last_violations,
         "latitude": lat,
         "longitude": lon,
         "score_history": score_history,
@@ -382,6 +405,7 @@ def score(req: ScoreRequest):
                 "latitude": s.get("latitude"),
                 "longitude": s.get("longitude"),
                 "score_history": s.get("score_history", []),
+                "last_violations": s.get("last_violations", []),
             })
         payload = attach_rat(payload)
         return ScoreResponse(**payload)
@@ -407,6 +431,7 @@ def score(req: ScoreRequest):
             "latitude": s.get("latitude"),
             "longitude": s.get("longitude"),
             "score_history": s.get("score_history", []),
+            "last_violations": s.get("last_violations", []),
         }
         payload = attach_rat(payload)
         return ScoreResponse(**payload)
