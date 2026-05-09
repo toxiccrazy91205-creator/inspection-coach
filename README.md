@@ -2,8 +2,8 @@
 
 
 ## Live links
-**API docs (Swagger):** https://hicc-api-srf7acimsa-uc.a.run.app/docs  
-**Health check:** https://hicc-api-srf7acimsa-uc.a.run.app/health
+**API docs (Swagger):** https://health-inspection-compliance-coach-production.up.railway.app/docs  
+**Health check:** https://health-inspection-compliance-coach-production.up.railway.app/health
 
 **Frontend demo:** https://hicc-web-kalle-georgievs-projects.vercel.app/
 
@@ -62,7 +62,7 @@ gcloud builds submit --tag us-central1-docker.pkg.dev/health-inspection-demo/hic
 Nightly refresh (recommended)
 Create a Cloud Scheduler HTTP job (cron 0 3 * * *, timezone America/Chicago) that calls:
 
-```POST https://hicc-api-srf7acimsa-uc.a.run.app/admin/refresh```
+```POST https://health-inspection-compliance-coach-production.up.railway.app/admin/refresh```
 ```Header: X-Admin-Token: <your-secret>```
 
 # API
