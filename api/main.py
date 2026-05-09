@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.routers.score import router as score_router
 from api.routers.search import router as search_router
-from api.routers.admin import router as admin_router  # secure endpoints
+from api.routers.admin import router as admin_router
+from api.routers.neighborhood import router as neighborhood_router
 
 app = FastAPI(
     title="Health Inspection Compliance Coach",
@@ -70,3 +71,4 @@ def metadata():
 app.include_router(score_router, prefix="")
 app.include_router(search_router, prefix="")
 app.include_router(admin_router, prefix="")
+app.include_router(neighborhood_router, prefix="")
