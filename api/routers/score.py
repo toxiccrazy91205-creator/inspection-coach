@@ -86,12 +86,13 @@ def _latest_visit_summary(camis: str):
     except Exception:
         last_score = None
 
-    last_grade = (
+    _raw_grade = (
         str(last["grade"]).strip().upper()
         if "grade" in df.columns and pd.notna(last["grade"])
         else None
     )
-    # Infer grade from score when not recorded (0–13 = A, 14–27 = B, 28+ = C)
+    last_grade = _raw_grade if _raw_grade in ("A", "B", "C") else None
+    # Infer grade from score when not a valid letter grade (0–13 = A, 14–27 = B, 28+ = C)
     if last_grade is None and last_score is not None:
         if last_score <= 13:
             last_grade = "A"
