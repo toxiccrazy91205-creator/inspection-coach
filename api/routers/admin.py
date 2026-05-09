@@ -49,6 +49,14 @@ def refresh(x_admin_token: str = Header(default="", description="Admin token —
     except Exception as e:
         steps.append(f"rat_reload_failed: {e}")
 
+    # 4) Invalidate insights cache so next /insights call reflects fresh data
+    try:
+        from api.routers.insights import _compute_insights
+        _compute_insights.cache_clear()
+        steps.append("insights_cache_cleared")
+    except Exception as e:
+        steps.append(f"insights_cache_clear_failed: {e}")
+
     return {"ok": True, "steps": steps}
 
 @router.get("/admin/ratpeek", summary="Debug: rat features for a CAMIS")
