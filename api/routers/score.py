@@ -25,8 +25,16 @@ RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
 CODE_LABELS = {
     "04M": "Food not held at proper temp",
-    "04L": "Evidence of mice",
-    "10F": "Personal cleanliness",
+    "04L": "Evidence of mice or live mice",
+    "04N": "Filth flies or food/refuse/sewage-associated flies",
+    "06D": "Food contact surface not properly washed/rinsed/sanitized",
+    "06C": "Food not protected from contamination",
+    "08A": "Facility not vermin-proof",
+    "10B": "Plumbing/sewage not properly drained",
+    "10F": "Non-food contact surface not properly maintained",
+    "10H": "Proper sanitization not provided for utensil washing",
+    "02G": "Cold food held above 41°F (smoked fish, reduced oxygen)",
+    "04A": "Food protection — improper handling",
 }
 
 def _parquet_path() -> str:
@@ -83,6 +91,14 @@ def _latest_visit_summary(camis: str):
         if "grade" in df.columns and pd.notna(last["grade"])
         else None
     )
+    # Infer grade from score when not recorded (0–13 = A, 14–27 = B, 28+ = C)
+    if last_grade is None and last_score is not None:
+        if last_score <= 13:
+            last_grade = "A"
+        elif last_score <= 27:
+            last_grade = "B"
+        else:
+            last_grade = "C"
 
     lat, lon = _extract_latlon(last)
 
