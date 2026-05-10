@@ -61,7 +61,17 @@ def _compute_insights():
     grade_counts = {g: int(counts.get(g, 0)) for g in ("A", "B", "C")}
     grade_counts["ungraded"] = int(total - sum(grade_counts.values()))
 
-    # Borough breakdown
+    # Borough breakdown with YoY trend
+    # Use one score per (camis, inspection_date) to avoid double-counting multi-violation rows
+    scored = (
+        df[df["score"].notna() & df["inspection_date"].notna() & df["boro"].notna()]
+        .drop_duplicates(subset=["camis", "inspection_date"])[["boro", "inspection_date", "score"]]
+    )
+    cutoff_recent = scored["inspection_date"].max() - pd.DateOffset(years=1)
+    cutoff_prior  = cutoff_recent - pd.DateOffset(years=1)
+    recent = scored[scored["inspection_date"] > cutoff_recent]
+    prior  = scored[(scored["inspection_date"] > cutoff_prior) & (scored["inspection_date"] <= cutoff_recent)]
+
     BOROS = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"]
     borough_stats = []
     for boro in BOROS:
@@ -69,11 +79,19 @@ def _compute_insights():
         if len(b) == 0:
             continue
         bcounts = b["grade_display"].value_counts().to_dict()
+
+        r = recent[recent["boro"].str.upper() == boro.upper()]["score"]
+        p = prior[prior["boro"].str.upper() == boro.upper()]["score"]
+        score_trend = None
+        if len(r) >= 10 and len(p) >= 10:
+            score_trend = round(float(r.mean() - p.mean()), 1)
+
         borough_stats.append({
             "boro": boro,
             "total": int(len(b)),
             "avg_score": round(float(b["score"].dropna().mean()), 1) if b["score"].notna().any() else None,
             "grade_counts": {g: int(bcounts.get(g, 0)) for g in ("A", "B", "C")},
+            "score_trend": score_trend,  # negative = improving (lower pts), positive = worsening
         })
 
     # Top violations — count unique restaurants affected by each violation code
