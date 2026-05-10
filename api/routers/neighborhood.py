@@ -43,33 +43,50 @@ def neighborhood(
     df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
     df["score"] = pd.to_numeric(df["score"], errors="coerce")
 
-    # One row per restaurant: most recent inspection
-    latest = (
-        df.sort_values("inspection_date")
-        .groupby("camis", as_index=False)
-        .last()
-    )
+    # Latest inspection date per restaurant
+    latest_dates = df.dropna(subset=["inspection_date"]).groupby("camis")["inspection_date"].max()
+    df = df.join(latest_dates.rename("latest_date"), on="camis")
+    latest_rows = df[df["inspection_date"] == df["latest_date"]].copy()
 
-    # Infer grade from score when missing
-    def infer_grade(row):
-        g = str(row.get("grade", "") or "").strip().upper()
-        if g in ("A", "B", "C"):
-            return g
-        s = row.get("score")
-        if s is None or pd.isna(s):
+    # Aggregate across all rows of the latest inspection so we don't depend on row order:
+    # - score: take first non-null (should be identical across rows)
+    # - grade: take first valid A/B/C found; only infer from score if none present
+    # - dba/boro/cuisine/building/street: take first non-null
+    def _first_valid_grade(s: pd.Series) -> str | None:
+        for v in s.dropna():
+            g = str(v).strip().upper()
+            if g in ("A", "B", "C"):
+                return g
+        return None
+
+    def _infer_grade(grade, score):
+        if grade in ("A", "B", "C"):
+            return grade
+        if score is None or pd.isna(score):
             return None
-        if s <= 13: return "A"
-        if s <= 27: return "B"
+        if score <= 13: return "A"
+        if score <= 27: return "B"
         return "C"
 
-    latest["grade_display"] = latest.apply(infer_grade, axis=1)
+    agg = latest_rows.groupby("camis").agg(
+        dba=("dba", "first"),
+        boro=("boro", "first"),
+        building=("building", "first"),
+        street=("street", "first"),
+        cuisine_description=("cuisine_description", "first"),
+        inspection_date=("inspection_date", "first"),
+        score=("score", "first"),
+        grade=("grade", _first_valid_grade),
+    ).reset_index()
+
+    agg["grade_display"] = agg.apply(lambda r: _infer_grade(r["grade"], r["score"]), axis=1)
 
     # Sort: most risky first (highest score), unscored at end
-    latest = latest.sort_values("score", ascending=False, na_position="last").head(limit)
+    agg = agg.sort_values("score", ascending=False, na_position="last").head(limit)
 
     today = date.today()
     results = []
-    for r in latest.itertuples(index=False):
+    for r in agg.itertuples(index=False):
         last_date = str(r.inspection_date)[:10] if pd.notna(r.inspection_date) else None
         days_since = None
         if last_date:

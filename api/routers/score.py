@@ -86,21 +86,6 @@ def _latest_visit_summary(camis: str):
     except Exception:
         last_score = None
 
-    _raw_grade = (
-        str(last["grade"]).strip().upper()
-        if "grade" in df.columns and pd.notna(last["grade"])
-        else None
-    )
-    last_grade = _raw_grade if _raw_grade in ("A", "B", "C") else None
-    # Infer grade from score when not a valid letter grade (0–13 = A, 14–27 = B, 28+ = C)
-    if last_grade is None and last_score is not None:
-        if last_score <= 13:
-            last_grade = "A"
-        elif last_score <= 27:
-            last_grade = "B"
-        else:
-            last_grade = "C"
-
     lat, lon = _extract_latlon(last)
 
     # fill coords from alternate parquet if missing
@@ -127,6 +112,24 @@ def _latest_visit_summary(camis: str):
     )
 
     same_visit = df[df["inspection_date"] == last["inspection_date"]] if "inspection_date" in df.columns else df.tail(1)
+
+    # Find grade by scanning all rows of the latest inspection — the grade column is
+    # only populated on some rows and can differ within an inspection. Prefer any
+    # explicit A/B/C present; fall back to inference from score.
+    last_grade = None
+    if "grade" in same_visit.columns:
+        for v in same_visit["grade"].dropna():
+            g = str(v).strip().upper()
+            if g in ("A", "B", "C"):
+                last_grade = g
+                break
+    if last_grade is None and last_score is not None:
+        if last_score <= 13:
+            last_grade = "A"
+        elif last_score <= 27:
+            last_grade = "B"
+        else:
+            last_grade = "C"
 
     labels_by_code: dict = {}
     if not same_visit.empty and "violation_code" in same_visit.columns and "violation_description" in same_visit.columns:
