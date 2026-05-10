@@ -10,7 +10,7 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
-COLS = ["camis", "boro", "inspection_date", "score", "grade",
+COLS = ["camis", "boro", "cuisine_description", "inspection_date", "score", "grade",
         "violation_code", "violation_description", "critical_flag"]
 
 
@@ -41,7 +41,12 @@ def _compute_insights():
     grade_per = (
         latest_rows.sort_values("inspection_date")
         .groupby("camis", as_index=False)
-        .last()[["camis", "boro", "score", "grade"]]
+        .last()[["camis", "boro", "cuisine_description", "score", "grade"]]
+    )
+
+    # Flag restaurants with at least one critical violation in latest inspection
+    critical_camis = set(
+        latest_rows[latest_rows["critical_flag"].str.upper().eq("CRITICAL")]["camis"].unique()
     )
 
     def _grade(row):
@@ -86,12 +91,20 @@ def _compute_insights():
         if len(r) >= 10 and len(p) >= 10:
             score_trend = round(float(r.mean() - p.mean()), 1)
 
+        critical_count = b["camis"].isin(critical_camis).sum()
+        critical_rate = round(critical_count / len(b) * 100, 1) if len(b) else None
+
+        cuisine_counts = b["cuisine_description"].dropna().value_counts()
+        top_cuisine = str(cuisine_counts.index[0]) if len(cuisine_counts) else None
+
         borough_stats.append({
             "boro": boro,
             "total": int(len(b)),
             "avg_score": round(float(b["score"].dropna().mean()), 1) if b["score"].notna().any() else None,
             "grade_counts": {g: int(bcounts.get(g, 0)) for g in ("A", "B", "C")},
-            "score_trend": score_trend,  # negative = improving (lower pts), positive = worsening
+            "score_trend": score_trend,
+            "critical_rate": critical_rate,
+            "top_cuisine": top_cuisine,
         })
 
     # Top violations — count unique restaurants affected by each violation code
