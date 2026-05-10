@@ -21,6 +21,12 @@ class LastViolation(BaseModel):
     critical: bool = Field(description="True if the violation was flagged Critical by the inspector")
 
 
+class CamisSuggestion(BaseModel):
+    camis: str
+    name: str
+    last_inspection_date: Optional[str]
+
+
 class ScoreRequest(BaseModel):
     camis: str = Field(description="NYC CAMIS identifier — the unique ID assigned to each restaurant by the city")
 
@@ -46,6 +52,7 @@ class ScoreResponse(BaseModel):
     longitude: Optional[float] = Field(default=None, description="Longitude of the restaurant (WGS84)")
     score_history: List[List] = Field(default=[], description="Chronological list of [date, points] pairs across all recorded inspections, suitable for rendering a trend chart")
     last_violations: List[LastViolation] = Field(default=[], description="All violations cited at the most recent inspection, sorted critical-first then by violation code")
+    suggested_camis: List[CamisSuggestion] = Field(default=[], description="Other CAMISes found at the same address with more recent inspections — likely the current operator after an ownership change")
 
     if _HAS_CONFIGDICT:
         model_config = ConfigDict(protected_namespaces=())

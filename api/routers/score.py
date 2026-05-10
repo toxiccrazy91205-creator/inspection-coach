@@ -5,7 +5,7 @@ from functools import lru_cache
 from fastapi import APIRouter, HTTPException
 from typing import List
 
-from api.models import ScoreRequest, ScoreResponse, ViolationProb, LastViolation
+from api.models import ScoreRequest, ScoreResponse, ViolationProb, LastViolation, CamisSuggestion
 from api.services.model_service import ModelService
 
 
@@ -260,6 +260,68 @@ def _safe_int(val):
         return None
 
 
+@lru_cache(maxsize=1)
+def _address_index():
+    """Build a (building, street, zipcode) → [(camis, dba, max_date)] lookup. Cached after first call."""
+    try:
+        p = _parquet_path()
+        df = pd.read_parquet(p, columns=["camis", "dba", "building", "street", "zipcode", "inspection_date"])
+        df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
+        df = df.dropna(subset=["building", "street", "zipcode", "inspection_date"])
+        df["building"] = df["building"].astype(str).str.strip().str.upper()
+        df["street"]   = df["street"].astype(str).str.strip().str.upper()
+        df["zipcode"]  = df["zipcode"].astype(str).str.strip()
+        agg = (
+            df.groupby(["camis", "dba", "building", "street", "zipcode"])["inspection_date"]
+            .max()
+            .reset_index()
+        )
+        idx: dict = {}
+        for r in agg.itertuples(index=False):
+            key = (r.building, r.street, r.zipcode)
+            idx.setdefault(key, []).append((str(r.camis), str(r.dba), str(r.inspection_date)[:10]))
+        return idx
+    except Exception:
+        return {}
+
+
+def _find_newer_camis(camis: str, s: dict) -> list:
+    """Return other CAMISes at the same address that have more recent inspections."""
+    STALE_DAYS = 730
+    days_since = s.get("days_since_last")
+    if days_since is None or days_since < STALE_DAYS:
+        return []
+
+    last_date = s.get("last_date")
+    # Normalise address fields from the parquet row
+    p = _parquet_path()
+    try:
+        df = pd.read_parquet(p, columns=["camis", "building", "street", "zipcode"],
+                             filters=[("camis", "=", camis)])
+        if df.empty:
+            return []
+        row = df.iloc[0]
+        building = str(row.get("building", "") or "").strip().upper()
+        street   = str(row.get("street",   "") or "").strip().upper()
+        zipcode  = str(row.get("zipcode",  "") or "").strip()
+        if not building or not street or not zipcode:
+            return []
+    except Exception:
+        return []
+
+    idx = _address_index()
+    candidates = idx.get((building, street, zipcode), [])
+    results = []
+    for c_camis, c_name, c_date in candidates:
+        if c_camis == camis:
+            continue
+        if last_date and c_date <= last_date:
+            continue
+        results.append(CamisSuggestion(camis=c_camis, name=c_name, last_inspection_date=c_date))
+    results.sort(key=lambda x: x.last_inspection_date or "", reverse=True)
+    return results[:3]
+
+
 # Borough B/C risk adjustment derived from NYC inspection data (deviation from 7.8% mean)
 BORO_RISK_DELTA = {
     "Queens": +0.03,
@@ -424,6 +486,7 @@ def score(req: ScoreRequest):
                 "longitude": s.get("longitude"),
                 "score_history": s.get("score_history", []),
                 "last_violations": s.get("last_violations", []),
+                "suggested_camis": _find_newer_camis(camis, s),
             })
         payload = attach_rat(payload)
         return ScoreResponse(**payload)
@@ -450,6 +513,7 @@ def score(req: ScoreRequest):
             "longitude": s.get("longitude"),
             "score_history": s.get("score_history", []),
             "last_violations": s.get("last_violations", []),
+            "suggested_camis": _find_newer_camis(camis, s),
         }
         payload = attach_rat(payload)
         return ScoreResponse(**payload)

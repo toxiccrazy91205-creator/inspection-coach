@@ -48,6 +48,14 @@ def _run_refresh():
     except Exception as e:
         steps.append(f"insights_cache_clear_failed:{e}")
 
+    try:
+        from api.routers.score import _address_index, _latest_visit_summary
+        _address_index.cache_clear()
+        _latest_visit_summary.cache_clear()
+        steps.append("score_caches_cleared")
+    except Exception as e:
+        steps.append(f"score_cache_clear_failed:{e}")
+
     _refresh_status["running"] = False
     _refresh_status["last"] = steps
 
