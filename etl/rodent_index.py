@@ -82,6 +82,22 @@ def _paged_get(url, params, limit=PAGE_LIMIT, max_rows=200000):
 
 def fetch_311_rodents(since: dt.datetime) -> pd.DataFrame:
     where = f"complaint_type='Rodent' AND latitude IS NOT NULL AND created_date >= '{since.isoformat()}'"
+    rows = _paged_get(SODA_311, {"$select":"created_date,descriptor,latitude,longitude", "$where": where})
+    df = pd.DataFrame(rows)
+    if df.empty: return df
+    df["created_date"] = pd.to_datetime(df["created_date"], errors="coerce")
+    df["lat"] = pd.to_numeric(df["latitude"], errors="coerce")
+    df["lon"] = pd.to_numeric(df["longitude"], errors="coerce")
+    df = df.dropna(subset=["lat","lon"])
+    df["cell"] = df.apply(lambda r: h3.latlng_to_cell(r.lat, r.lon, RES), axis=1)
+    return df[["created_date","cell","descriptor"]]
+
+def fetch_311_pests(since: dt.datetime) -> pd.DataFrame:
+    """UNSANITARY CONDITION / PESTS — indoor cockroach/pest complaints from residents."""
+    where = (
+        f"complaint_type='UNSANITARY CONDITION' AND descriptor='PESTS' "
+        f"AND latitude IS NOT NULL AND created_date >= '{since.isoformat()}'"
+    )
     rows = _paged_get(SODA_311, {"$select":"created_date,latitude,longitude", "$where": where})
     df = pd.DataFrame(rows)
     if df.empty: return df
@@ -120,11 +136,24 @@ def build_rat_features():
     print(f"[rat] Fetching 311 rodents since {since311.date()} …")
     df311 = fetch_311_rodents(since311)
 
+    print(f"[rat] Fetching 311 indoor pest complaints since {since311.date()} …")
+    dfpests = fetch_311_pests(since311)
+
     print(f"[rat] Fetching DOHMH rodent inspections since {sinceRats.date()} …")
     dfr = fetch_dohmh_rats(sinceRats)
 
-    cnt311 = df311.groupby("cell").size().rename("cnt311").to_dict() if not df311.empty else {}
-    cntR_fail = dfr[dfr["fail"]].groupby("cell").size().rename("cntR").to_dict() if not dfr.empty else {}
+    # Split rodent 311 by descriptor: rat sightings vs mouse sightings
+    if not df311.empty:
+        mouse_mask = df311["descriptor"].str.lower() == "mouse sighting"
+        df311_rat   = df311[~mouse_mask]
+        df311_mouse = df311[mouse_mask]
+    else:
+        df311_rat = df311_mouse = df311
+
+    cnt311_rat   = df311_rat.groupby("cell").size().to_dict()   if not df311_rat.empty   else {}
+    cnt311_mouse = df311_mouse.groupby("cell").size().to_dict() if not df311_mouse.empty else {}
+    cnt311_pest  = dfpests.groupby("cell").size().to_dict()     if not dfpests.empty     else {}
+    cntR_fail    = dfr[dfr["fail"]].groupby("cell").size().to_dict() if not dfr.empty   else {}
 
     raw = pd.read_parquet(raw_path, columns=["camis","latitude","longitude"]).dropna()
     raw = raw.drop_duplicates("camis", keep="last").copy()
@@ -137,7 +166,9 @@ def build_rat_features():
         return total
 
     out = raw[["camis","cell"]].copy()
-    out["rat311_cnt_180d_k1"]   = out["cell"].apply(lambda c: ring_sum(c, cnt311, 1))
+    out["rat311_cnt_180d_k1"]   = out["cell"].apply(lambda c: ring_sum(c, cnt311_rat, 1))
+    out["mouse311_cnt_180d_k1"] = out["cell"].apply(lambda c: ring_sum(c, cnt311_mouse, 1))
+    out["pest311_cnt_180d_k1"]  = out["cell"].apply(lambda c: ring_sum(c, cnt311_pest, 1))
     out["ratinsp_fail_365d_k1"] = out["cell"].apply(lambda c: ring_sum(c, cntR_fail, 1))
 
     # robust 0–1 normalization
@@ -146,7 +177,13 @@ def build_rat_features():
         q1, q9 = s.quantile(0.1), s.quantile(0.9)
         return ((s - q1) / (q9 - q1 + 1e-9)).clip(0, 1)
 
-    out["rat_index"] = qnorm(0.7*out["rat311_cnt_180d_k1"] + 0.3*out["ratinsp_fail_365d_k1"])
+    out["rat_index"]  = qnorm(0.7 * out["rat311_cnt_180d_k1"] + 0.3 * out["ratinsp_fail_365d_k1"])
+    out["pest_index"] = qnorm(
+        0.45 * out["rat311_cnt_180d_k1"] +
+        0.20 * out["ratinsp_fail_365d_k1"] +
+        0.20 * out["mouse311_cnt_180d_k1"] +
+        0.15 * out["pest311_cnt_180d_k1"]
+    )
     out = out.drop(columns=["cell"])
     out.to_parquet(OUT_FILE, index=False)
     print(f"[rat] Wrote {OUT_FILE} with {len(out):,} rows")

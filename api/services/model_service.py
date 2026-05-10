@@ -46,11 +46,22 @@ class ModelService:
             return {}
         df["camis"] = df["camis"].astype(str)
         out: Dict[str, Dict[str, Any]] = {}
+        def _f(r, col):
+            v = getattr(r, col, None)
+            return float(v) if v is not None else None
+
+        def _i(r, col):
+            v = getattr(r, col, None)
+            return int(v) if v is not None else 0
+
         for r in df.itertuples(index=False):
             out[r.camis] = {
-                "rat_index": float(getattr(r, "rat_index", None)) if getattr(r, "rat_index", None) is not None else None,
-                "rat311_cnt_180d_k1": int(getattr(r, "rat311_cnt_180d_k1", 0)) if getattr(r, "rat311_cnt_180d_k1", None) is not None else 0,
-                "ratinsp_fail_365d_k1": int(getattr(r, "ratinsp_fail_365d_k1", 0)) if getattr(r, "ratinsp_fail_365d_k1", None) is not None else 0,
+                "rat_index":              _f(r, "rat_index"),
+                "pest_index":             _f(r, "pest_index"),
+                "rat311_cnt_180d_k1":     _i(r, "rat311_cnt_180d_k1"),
+                "mouse311_cnt_180d_k1":   _i(r, "mouse311_cnt_180d_k1"),
+                "pest311_cnt_180d_k1":    _i(r, "pest311_cnt_180d_k1"),
+                "ratinsp_fail_365d_k1":   _i(r, "ratinsp_fail_365d_k1"),
             }
         return out
 
@@ -80,21 +91,22 @@ class ModelService:
 
     def _apply_rat_heuristics(self, camis: str, payload: Dict[str, Any]) -> Dict[str, Any]:
         rf = self.rat_features.get(camis, {})
-        # Always attach the raw feature fields (even if None/0) so UI renders consistently.
-        payload.setdefault("rat_index", rf.get("rat_index"))
-        payload.setdefault("rat311_cnt_180d_k1", rf.get("rat311_cnt_180d_k1"))
+        payload.setdefault("rat_index",            rf.get("rat_index"))
+        payload.setdefault("pest_index",           rf.get("pest_index"))
+        payload.setdefault("rat311_cnt_180d_k1",   rf.get("rat311_cnt_180d_k1"))
+        payload.setdefault("mouse311_cnt_180d_k1", rf.get("mouse311_cnt_180d_k1"))
+        payload.setdefault("pest311_cnt_180d_k1",  rf.get("pest311_cnt_180d_k1"))
         payload.setdefault("ratinsp_fail_365d_k1", rf.get("ratinsp_fail_365d_k1"))
 
-        ri = rf.get("rat_index")
-        if isinstance(ri, (int, float)):
-            # Gentle overall risk bump, capped
+        # Use pest_index (broader signal) for risk bump; fall back to rat_index
+        pi = rf.get("pest_index") or rf.get("rat_index")
+        if isinstance(pi, (int, float)):
             if isinstance(payload.get("prob_bc"), (int, float)):
-                payload["prob_bc"] = float(min(0.99, payload["prob_bc"] + min(0.12, 0.12 * ri)))
-            # Slightly bump mice (04L) probability if present
+                payload["prob_bc"] = float(min(0.99, payload["prob_bc"] + min(0.12, 0.12 * pi)))
             tvp = payload.get("top_violation_probs") or []
             for v in tvp:
                 if v.get("code") == "04L" and isinstance(v.get("probability"), (int, float)):
-                    v["probability"] = float(min(0.99, v["probability"] + 0.20 * ri))
+                    v["probability"] = float(min(0.99, v["probability"] + 0.20 * pi))
         return payload
 
     # ---------- public ----------

@@ -402,8 +402,11 @@ def score(req: ScoreRequest):
         rf = getattr(model_service, "rat_features", {}).get(camis)
         if rf:
             payload.update({
-                "rat_index": rf.get("rat_index"),
-                "rat311_cnt_180d_k1": rf.get("rat311_cnt_180d_k1"),
+                "rat_index":            rf.get("rat_index"),
+                "pest_index":           rf.get("pest_index"),
+                "rat311_cnt_180d_k1":   rf.get("rat311_cnt_180d_k1"),
+                "mouse311_cnt_180d_k1": rf.get("mouse311_cnt_180d_k1"),
+                "pest311_cnt_180d_k1":  rf.get("pest311_cnt_180d_k1"),
                 "ratinsp_fail_365d_k1": rf.get("ratinsp_fail_365d_k1"),
             })
         return payload
