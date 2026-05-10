@@ -10,7 +10,7 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
-COLS = ["camis", "inspection_date", "score", "grade",
+COLS = ["camis", "boro", "inspection_date", "score", "grade",
         "violation_code", "violation_description", "critical_flag"]
 
 
@@ -37,11 +37,11 @@ def _compute_insights():
     df = df.join(latest_dates, on="camis")
     latest_rows = df[df["inspection_date"] == df["latest_date"]].copy()
 
-    # Grade distribution — one grade per restaurant
+    # One row per restaurant (latest inspection)
     grade_per = (
         latest_rows.sort_values("inspection_date")
         .groupby("camis", as_index=False)
-        .last()[["camis", "score", "grade"]]
+        .last()[["camis", "boro", "score", "grade"]]
     )
 
     def _grade(row):
@@ -60,6 +60,21 @@ def _compute_insights():
     counts = grade_per["grade_display"].value_counts().to_dict()
     grade_counts = {g: int(counts.get(g, 0)) for g in ("A", "B", "C")}
     grade_counts["ungraded"] = int(total - sum(grade_counts.values()))
+
+    # Borough breakdown
+    BOROS = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"]
+    borough_stats = []
+    for boro in BOROS:
+        b = grade_per[grade_per["boro"].str.upper() == boro.upper()]
+        if len(b) == 0:
+            continue
+        bcounts = b["grade_display"].value_counts().to_dict()
+        borough_stats.append({
+            "boro": boro,
+            "total": int(len(b)),
+            "avg_score": round(float(b["score"].dropna().mean()), 1) if b["score"].notna().any() else None,
+            "grade_counts": {g: int(bcounts.get(g, 0)) for g in ("A", "B", "C")},
+        })
 
     # Top violations — count unique restaurants affected by each violation code
     # in their most recent inspection
@@ -97,6 +112,7 @@ def _compute_insights():
         "total_restaurants": total,
         "grade_counts": grade_counts,
         "top_violations": top_violations,
+        "borough_stats": borough_stats,
     }
 
 
