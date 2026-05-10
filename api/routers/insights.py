@@ -10,7 +10,8 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
-COLS = ["camis", "inspection_date", "score", "grade"]
+COLS = ["camis", "inspection_date", "score", "grade",
+        "violation_code", "violation_description", "critical_flag"]
 
 
 def _parquet_path():
@@ -26,14 +27,23 @@ def _compute_insights():
     df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
     df["score"] = pd.to_numeric(df["score"], errors="coerce")
 
-    # One row per restaurant: most recent inspection
-    latest = (
-        df.sort_values("inspection_date")
+    # One row per restaurant: most recent inspection date
+    latest_dates = (
+        df.dropna(subset=["inspection_date"])
+        .groupby("camis")["inspection_date"]
+        .max()
+        .rename("latest_date")
+    )
+    df = df.join(latest_dates, on="camis")
+    latest_rows = df[df["inspection_date"] == df["latest_date"]].copy()
+
+    # Grade distribution — one grade per restaurant
+    grade_per = (
+        latest_rows.sort_values("inspection_date")
         .groupby("camis", as_index=False)
-        .last()
+        .last()[["camis", "score", "grade"]]
     )
 
-    # Infer grade from score when not a valid letter grade
     def _grade(row):
         g = str(row.get("grade") or "").strip().upper()
         if g in ("A", "B", "C"):
@@ -45,16 +55,48 @@ def _compute_insights():
         if s <= 27: return "B"
         return "C"
 
-    latest["grade_display"] = latest.apply(_grade, axis=1)
-
-    total = len(latest)
-    counts = latest["grade_display"].value_counts().to_dict()
+    grade_per["grade_display"] = grade_per.apply(_grade, axis=1)
+    total = len(grade_per)
+    counts = grade_per["grade_display"].value_counts().to_dict()
     grade_counts = {g: int(counts.get(g, 0)) for g in ("A", "B", "C")}
     grade_counts["ungraded"] = int(total - sum(grade_counts.values()))
+
+    # Top violations — count unique restaurants affected by each violation code
+    # in their most recent inspection
+    viols = latest_rows[
+        latest_rows["violation_code"].notna() &
+        latest_rows["violation_description"].notna()
+    ][["camis", "violation_code", "violation_description", "critical_flag"]].drop_duplicates(
+        subset=["camis", "violation_code"]
+    )
+
+    # Map each code to its description and critical flag (use most common)
+    code_meta = (
+        viols.groupby("violation_code")
+        .agg(
+            description=("violation_description", lambda x: x.mode().iloc[0] if len(x) else ""),
+            critical=("critical_flag", lambda x: (x.str.upper() == "CRITICAL").any()),
+            restaurant_count=("camis", "nunique"),
+        )
+        .reset_index()
+        .sort_values("restaurant_count", ascending=False)
+        .head(3)
+    )
+
+    top_violations = [
+        {
+            "code": str(r.violation_code),
+            "description": str(r.description),
+            "critical": bool(r.critical),
+            "restaurant_count": int(r.restaurant_count),
+        }
+        for r in code_meta.itertuples(index=False)
+    ]
 
     return {
         "total_restaurants": total,
         "grade_counts": grade_counts,
+        "top_violations": top_violations,
     }
 
 
@@ -64,7 +106,7 @@ def insights():
     Returns precomputed citywide statistics derived from the latest inspection per restaurant:
     - Total number of restaurants tracked
     - Grade distribution (count of A / B / C / ungraded across all ~31k restaurants)
-    - Top 5 highest-scoring (riskiest) restaurants in NYC by most recent inspection score
+    - Top 3 most common violations by number of restaurants affected (latest inspection only)
 
     Results are cached in memory after the first call and reset on data refresh.
     """
