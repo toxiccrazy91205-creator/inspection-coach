@@ -12,8 +12,10 @@ jobs:
     steps:
       - name: Trigger ETL refresh
         run: |
-          echo "Triggering refresh at $(date -u)"
-          response=$(curl -s -w "\n%{http_code}" -X POST "${{ secrets.API_URL }}/admin/refresh" \
+          BASE_URL="${{ secrets.API_URL }}"
+          BASE_URL="${BASE_URL%/}"   # strip any trailing slash
+          echo "Triggering refresh at $(date -u) — $BASE_URL"
+          response=$(curl -s -w "\n%{http_code}" -X POST "$BASE_URL/admin/refresh" \
             -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
             -H "Content-Type: application/json" \
             --max-time 25)
@@ -28,10 +30,12 @@ jobs:
 
       - name: Poll until refresh completes
         run: |
+          BASE_URL="${{ secrets.API_URL }}"
+          BASE_URL="${BASE_URL%/}"
           echo "Polling /admin/refresh/status …"
           for i in $(seq 1 40); do
             sleep 30
-            response=$(curl -s -w "\n%{http_code}" "${{ secrets.API_URL }}/admin/refresh/status" \
+            response=$(curl -s -w "\n%{http_code}" "$BASE_URL/admin/refresh/status" \
               -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
               --max-time 15)
             body=$(echo "$response" | head -n -1)
