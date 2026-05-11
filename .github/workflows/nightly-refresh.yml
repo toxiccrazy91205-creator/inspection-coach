@@ -1,0 +1,51 @@
+name: Nightly Data Refresh
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # 03:00 UTC daily
+  workflow_dispatch:        # allow manual trigger from GitHub UI
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Trigger ETL refresh
+        run: |
+          echo "Triggering refresh at $(date -u)"
+          response=$(curl -s -w "\n%{http_code}" -X POST "${{ secrets.API_URL }}/admin/refresh" \
+            -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --max-time 25)
+          body=$(echo "$response" | head -n -1)
+          status=$(echo "$response" | tail -n 1)
+          echo "HTTP $status"
+          echo "$body"
+          if [ "$status" != "200" ]; then
+            echo "Refresh trigger failed with HTTP $status"
+            exit 1
+          fi
+
+      - name: Poll until refresh completes
+        run: |
+          echo "Polling /admin/refresh/status …"
+          for i in $(seq 1 40); do
+            sleep 30
+            response=$(curl -s -w "\n%{http_code}" "${{ secrets.API_URL }}/admin/refresh/status" \
+              -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
+              --max-time 15)
+            body=$(echo "$response" | head -n -1)
+            status=$(echo "$response" | tail -n 1)
+            echo "Poll $i — HTTP $status — $body"
+            if [ "$status" != "200" ]; then
+              echo "Status check failed"
+              exit 1
+            fi
+            running=$(echo "$body" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('running', True))" 2>/dev/null)
+            if [ "$running" = "False" ]; then
+              echo "Refresh complete."
+              exit 0
+            fi
+          done
+          echo "Timed out waiting for refresh (20 min)"
+          exit 1
