@@ -11,7 +11,8 @@ RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
 COLS = ["camis", "dba", "boro", "building", "street", "zipcode",
-        "cuisine_description", "inspection_date", "score", "grade"]
+        "cuisine_description", "inspection_date", "score", "grade",
+        "latitude", "longitude"]
 
 
 def _parquet_path():
@@ -77,6 +78,8 @@ def neighborhood(
         inspection_date=("inspection_date", "first"),
         score=("score", "first"),
         grade=("grade", _first_valid_grade),
+        latitude=("latitude", "first"),
+        longitude=("longitude", "first"),
     ).reset_index()
 
     agg["grade_display"] = agg.apply(lambda r: _infer_grade(r["grade"], r["score"]), axis=1)
@@ -95,6 +98,11 @@ def neighborhood(
             except Exception:
                 pass
         score_val = int(r.score) if pd.notna(r.score) else None
+        try:
+            lat = float(r.latitude) if pd.notna(r.latitude) else None
+            lon = float(r.longitude) if pd.notna(r.longitude) else None
+        except (TypeError, ValueError):
+            lat = lon = None
         results.append({
             "camis": str(r.camis),
             "name": str(r.dba),
@@ -105,5 +113,7 @@ def neighborhood(
             "last_score": score_val,
             "last_date": last_date,
             "days_since": days_since,
+            "latitude": lat,
+            "longitude": lon,
         })
     return results
