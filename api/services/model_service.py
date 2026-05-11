@@ -48,11 +48,17 @@ class ModelService:
         out: Dict[str, Dict[str, Any]] = {}
         def _f(r, col):
             v = getattr(r, col, None)
-            return float(v) if v is not None else None
+            try:
+                return float(v) if v is not None else None
+            except (TypeError, ValueError):
+                return None
 
         def _i(r, col):
             v = getattr(r, col, None)
-            return int(v) if v is not None else 0
+            try:
+                return int(v) if v is not None else 0
+            except (TypeError, ValueError):
+                return 0
 
         for r in df.itertuples(index=False):
             out[r.camis] = {
@@ -78,8 +84,8 @@ class ModelService:
                 return self._read_rat_parquet(runtime_path)
             if os.path.exists(baked_path):
                 return self._read_rat_parquet(baked_path)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[model_service] WARNING: failed to load rat features: {e}", flush=True)
         return {}
 
     def reload_rat_features(self) -> int:
