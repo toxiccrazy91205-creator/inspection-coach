@@ -11,12 +11,14 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Trigger ETL refresh
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
-          BASE_URL="${{ secrets.API_URL }}"
-          BASE_URL="${BASE_URL%/}"   # strip any trailing slash
-          echo "Triggering refresh at $(date -u) — $BASE_URL"
+          BASE_URL="${API_URL%/}"
+          echo "Triggering refresh at $(date -u) against $BASE_URL"
           response=$(curl -s -w "\n%{http_code}" -X POST "$BASE_URL/admin/refresh" \
-            -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
+            -H "X-Admin-Token: $ADMIN_TOKEN" \
             -H "Content-Type: application/json" \
             --max-time 25)
           body=$(echo "$response" | head -n -1)
@@ -29,14 +31,16 @@ jobs:
           fi
 
       - name: Poll until refresh completes
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
-          BASE_URL="${{ secrets.API_URL }}"
-          BASE_URL="${BASE_URL%/}"
-          echo "Polling /admin/refresh/status …"
+          BASE_URL="${API_URL%/}"
+          echo "Polling $BASE_URL/admin/refresh/status ..."
           for i in $(seq 1 40); do
             sleep 30
             response=$(curl -s -w "\n%{http_code}" "$BASE_URL/admin/refresh/status" \
-              -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
+              -H "X-Admin-Token: $ADMIN_TOKEN" \
               --max-time 15)
             body=$(echo "$response" | head -n -1)
             status=$(echo "$response" | tail -n 1)
