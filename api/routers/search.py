@@ -1,4 +1,5 @@
 import os
+from functools import lru_cache
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Query
 
@@ -10,6 +11,20 @@ BAKED_PARQUET_DIR = os.getenv("BAKED_FEATURE_DIR", "./data/parquet")
 RAW_FILE_RUNTIME = os.path.join(RUNTIME_PARQUET_DIR, "inspections_raw.parquet")
 RAW_FILE_BAKED = os.path.join(BAKED_PARQUET_DIR, "inspections_raw.parquet")
 
+
+@lru_cache(maxsize=1)
+def _load_search_index() -> pd.DataFrame:
+    """Load and deduplicate the restaurant name index. Cached until manually cleared on refresh."""
+    raw_file = RAW_FILE_RUNTIME if os.path.exists(RAW_FILE_RUNTIME) else RAW_FILE_BAKED
+    if not os.path.exists(raw_file):
+        raise HTTPException(status_code=500, detail="No data parquet found. Run ETL locally then rebuild, or call /admin/refresh in prod.")
+    df = pd.read_parquet(raw_file, columns=["camis", "dba", "boro", "building", "street", "zipcode", "inspection_date"])
+    df = df.dropna(subset=["camis", "dba"]).copy()
+    df["dba_u"] = df["dba"].astype(str).str.upper()
+    # One row per CAMIS (most recent inspection) — done once at load time
+    return df.sort_values(["camis", "inspection_date"]).groupby("camis", as_index=False).tail(1)
+
+
 @router.get("/search", summary="Search restaurants by name")
 def search(name: str = Query(..., min_length=2, description="Partial restaurant name — minimum 2 characters, case-insensitive")):
     """
@@ -19,19 +34,9 @@ def search(name: str = Query(..., min_length=2, description="Partial restaurant 
     The search is a case-insensitive substring match against the restaurant's registered name
     in the NYC inspection dataset.
     """
-    # Use runtime-refreshed parquet if available; else baked parquet from the image
-    raw_file = RAW_FILE_RUNTIME if os.path.exists(RAW_FILE_RUNTIME) else RAW_FILE_BAKED
-    if not os.path.exists(raw_file):
-        raise HTTPException(status_code=500, detail="No data parquet found. Run ETL locally then rebuild, or call /admin/refresh in prod.")
-    df = pd.read_parquet(raw_file, columns=["camis","dba","boro","building","street","zipcode","inspection_date"])
-    df = df.dropna(subset=["camis","dba"]).copy()
-    df["dba_u"] = df["dba"].astype(str).str.upper()
+    df = _load_search_index()
     q = name.upper()
-    hits = (df[df["dba_u"].str.contains(q, na=False)]
-            .sort_values(["camis","inspection_date"])
-            .groupby("camis", as_index=False).tail(1)
-            .sort_values("dba_u")
-            .head(25))
+    hits = df[df["dba_u"].str.contains(q, na=False)].sort_values("dba_u").head(25)
     return [
         {
             "camis": str(r.camis),

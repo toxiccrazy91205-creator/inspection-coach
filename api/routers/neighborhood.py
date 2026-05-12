@@ -1,5 +1,6 @@
 import os
 from datetime import date
+from functools import lru_cache
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Query
 
@@ -15,11 +16,22 @@ COLS = ["camis", "dba", "boro", "building", "street", "zipcode",
         "latitude", "longitude"]
 
 
-def _parquet_path():
+@lru_cache(maxsize=1)
+def _load_latest_rows() -> pd.DataFrame:
+    """
+    Load the full inspections parquet and return only rows from each restaurant's
+    most recent inspection. Cached until manually cleared on refresh.
+    """
     p = RAW_FILE_RUNTIME if os.path.exists(RAW_FILE_RUNTIME) else RAW_FILE_BAKED
     if not os.path.exists(p):
         raise HTTPException(status_code=500, detail="No data parquet found.")
-    return p
+    df = pd.read_parquet(p, columns=COLS)
+    df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
+    df["score"] = pd.to_numeric(df["score"], errors="coerce")
+    df["zipcode"] = df["zipcode"].astype(str).str.strip()
+    latest_dates = df.dropna(subset=["inspection_date"]).groupby("camis")["inspection_date"].max()
+    df = df.join(latest_dates.rename("latest_date"), on="camis")
+    return df[df["inspection_date"] == df["latest_date"]].copy()
 
 
 @router.get("/neighborhood", summary="List restaurants in a zip code by inspection risk")
@@ -35,24 +47,11 @@ def neighborhood(
     Grades are inferred from the point score when not explicitly recorded (0–13 = A, 14–27 = B, 28+ = C).
     Only the most recent inspection per restaurant is returned.
     """
-    p = _parquet_path()
-    df = pd.read_parquet(p, columns=COLS)
-    df = df[df["zipcode"].astype(str).str.strip() == zip.strip()].copy()
-    if df.empty:
+    latest_rows = _load_latest_rows()
+    zip_rows = latest_rows[latest_rows["zipcode"] == zip.strip()]
+    if zip_rows.empty:
         return []
 
-    df["inspection_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
-    df["score"] = pd.to_numeric(df["score"], errors="coerce")
-
-    # Latest inspection date per restaurant
-    latest_dates = df.dropna(subset=["inspection_date"]).groupby("camis")["inspection_date"].max()
-    df = df.join(latest_dates.rename("latest_date"), on="camis")
-    latest_rows = df[df["inspection_date"] == df["latest_date"]].copy()
-
-    # Aggregate across all rows of the latest inspection so we don't depend on row order:
-    # - score: take first non-null (should be identical across rows)
-    # - grade: take first valid A/B/C found; only infer from score if none present
-    # - dba/boro/cuisine/building/street: take first non-null
     def _first_valid_grade(s: pd.Series) -> str | None:
         for v in s.dropna():
             g = str(v).strip().upper()
@@ -69,7 +68,7 @@ def neighborhood(
         if score <= 27: return "B"
         return "C"
 
-    agg = latest_rows.groupby("camis").agg(
+    agg = zip_rows.groupby("camis").agg(
         dba=("dba", "first"),
         boro=("boro", "first"),
         building=("building", "first"),

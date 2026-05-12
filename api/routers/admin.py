@@ -56,6 +56,20 @@ def _run_refresh():
     except Exception as e:
         steps.append(f"score_cache_clear_failed:{e}")
 
+    try:
+        from api.routers.search import _load_search_index
+        _load_search_index.cache_clear()
+        steps.append("search_cache_cleared")
+    except Exception as e:
+        steps.append(f"search_cache_clear_failed:{e}")
+
+    try:
+        from api.routers.neighborhood import _load_latest_rows
+        _load_latest_rows.cache_clear()
+        steps.append("neighborhood_cache_cleared")
+    except Exception as e:
+        steps.append(f"neighborhood_cache_clear_failed:{e}")
+
     _refresh_status["running"] = False
     _refresh_status["last"] = steps
 

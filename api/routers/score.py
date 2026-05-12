@@ -10,9 +10,6 @@ from api.services.model_service import ModelService
 
 
 router = APIRouter()
-svc = ModelService(model_path="", demo_seed="./data/demo_seed.json")
-
-router = APIRouter()
 
 DEMO_SEED_FILE = os.getenv("DEMO_SEED_FILE", "./data/demo_seed.json")
 MODEL_PATH = os.getenv("MODEL_PATH", "./models/dummy.joblib")
