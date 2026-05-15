@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Start the Next.js frontend on internal port 3000
-echo "Starting Next.js Frontend on localhost:3000..."
-PORT=3000 node frontend/server.js > /dev/stdout 2>&1 &
+# Force Next.js to bind to 0.0.0.0 so loopback works correctly
+echo "Starting Next.js Frontend on 0.0.0.0:3000..."
+HOSTNAME=0.0.0.0 PORT=3000 node frontend/server.js > /dev/stdout 2>&1 &
 
 # Start the FastAPI backend on the Render assigned PORT
 echo "Starting FastAPI Gateway on Port $PORT..."

@@ -108,12 +108,17 @@ async def proxy_frontend(path_name: str, request: Request):
                 )
                 proxy_resp = await client.send(proxy_req, stream=True)
                 
+                # Sanitize headers (exclude hop-by-hop and content-length)
+                excluded = ["content-encoding", "content-length", "transfer-encoding", "connection", "keep-alive"]
+                headers = {k: v for k, v in proxy_resp.headers.items() if k.lower() not in excluded}
+                
                 return StreamingResponse(
                     proxy_resp.aiter_raw(),
                     status_code=proxy_resp.status_code,
-                    headers=dict(proxy_resp.headers)
+                    headers=headers
                 )
-            except (httpx.ConnectError, httpx.ConnectTimeout):
+            except Exception as e:
+                print(f"Proxy attempt {attempt+1} failed: {e}", flush=True)
                 if attempt == 4:
                     raise
                 await asyncio.sleep(2)
