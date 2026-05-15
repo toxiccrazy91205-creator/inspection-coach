@@ -37,9 +37,9 @@ COPY --from=frontend-builder /app/frontend/public ./frontend/public
 COPY nginx.conf /etc/nginx/conf.d/default.conf.template
 RUN rm /etc/nginx/sites-enabled/default
 
-# Setup Startup Script
+# Setup Startup Script and fix potential Windows line endings
 COPY start.sh .
-RUN chmod +x start.sh
+RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 
 # Environment variables
 ENV PORT=10000
