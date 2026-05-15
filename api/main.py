@@ -98,9 +98,9 @@ async def proxy_frontend(path_name: str, request: Request):
         # Simple retry logic in case Next.js is still starting up
         for attempt in range(5):
             try:
-                # Strip headers that cause encoding/routing issues in proxying
+                # Force identity encoding to prevent compression issues
                 req_headers = dict(request.headers)
-                req_headers.pop("accept-encoding", None)
+                req_headers["accept-encoding"] = "identity"
                 req_headers.pop("host", None)
                 req_headers.pop("connection", None)
 
@@ -112,17 +112,18 @@ async def proxy_frontend(path_name: str, request: Request):
                     content=content,
                     params=request.query_params
                 )
-                proxy_resp = await client.send(proxy_req, stream=True)
                 
-                # Sanitize headers (exclude hop-by-hop and content-length)
-                # IMPORTANT: Keep 'content-encoding' so the browser knows if it's Gzip/Brotli
-                excluded = ["content-length", "transfer-encoding", "connection", "keep-alive"]
-                headers = {k: v for k, v in proxy_resp.headers.items() if k.lower() not in excluded}
+                # Use non-streaming to ensure httpx decodes content properly
+                proxy_resp = await client.send(proxy_req)
                 
-                return StreamingResponse(
-                    proxy_resp.aiter_raw(),
+                # Strip encoding/length headers as we are sending raw decoded content
+                excluded = ["content-encoding", "content-length", "transfer-encoding", "connection", "keep-alive"]
+                resp_headers = {k: v for k, v in proxy_resp.headers.items() if k.lower() not in excluded}
+                
+                return Response(
+                    content=proxy_resp.content,
                     status_code=proxy_resp.status_code,
-                    headers=headers
+                    headers=resp_headers
                 )
             except Exception as e:
                 print(f"Proxy attempt {attempt+1} failed: {e}", flush=True)
