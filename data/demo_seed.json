@@ -1,702 +1,4006 @@
-{
-  "30191841": {
-    "camis": "30191841",
-    "prob_bc": 0.357,
-    "predicted_points": 10.0,
+[
+  {
+    "fssai_id": "10712809673699",
+    "name": "Vishala",
+    "area": "Ahmedabad",
+    "latitude": 22.9936417,
+    "longitude": 72.5357058,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 10",
-      "Consistent A history"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.6785714285714286,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.5785714285714286,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.47857142857142854,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40356731": {
-    "camis": "40356731",
-    "prob_bc": 0.429,
-    "predicted_points": 12.0,
+  {
+    "fssai_id": "10730861796220",
+    "name": "Rajvadu Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0042051,
+    "longitude": 72.5397742,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 12",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.7142857142857143,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.6142857142857143,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5142857142857142,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40362264": {
-    "camis": "40362264",
-    "prob_bc": 0.464,
-    "predicted_points": 13.0,
+  {
+    "fssai_id": "10782042544170",
+    "name": "Mangaldas Ni Haveli",
+    "area": "Ahmedabad",
+    "latitude": 23.0227338,
+    "longitude": 72.5920852,
+    "prob_fssai_fail": 0.21,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 13",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.7321428571428572,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.25,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.6321428571428571,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5321428571428571,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.17,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 21.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40363298": {
-    "camis": "40363298",
-    "prob_bc": 0.464,
-    "predicted_points": 13.0,
+  {
+    "fssai_id": "10716640106673",
+    "name": "McDonald's",
+    "area": "Ahmedabad",
+    "latitude": 23.0317635,
+    "longitude": 72.5701852,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 13",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.7321428571428572,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.6321428571428571,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5321428571428571,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40363427": {
-    "camis": "40363427",
-    "prob_bc": 0.95,
-    "predicted_points": 37.0,
+  {
+    "fssai_id": "10736939308463",
+    "name": "Cafe Souq",
+    "area": "Ahmedabad",
+    "latitude": 23.0410467,
+    "longitude": 72.5485619,
+    "prob_fssai_fail": 0.39,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 37",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.9,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.47,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.8,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.6,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.31,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 39.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40364220": {
-    "camis": "40364220",
-    "prob_bc": 0.95,
-    "predicted_points": 32.0,
+  {
+    "fssai_id": "10713655967583",
+    "name": "Upper Crust Cafe",
+    "area": "Vijay Cross Roads",
+    "latitude": 23.0412121,
+    "longitude": 72.5485673,
+    "prob_fssai_fail": 0.34,
+    "cuisine": "international",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 32",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.9,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.41,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.8,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.6,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.27,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364296": {
-    "camis": "40364296",
-    "prob_bc": 0.393,
-    "predicted_points": 11.0,
-    "top_reasons": [
-      "Last points: 11",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6964285714285714,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5964285714285714,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.49642857142857144,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364389": {
-    "camis": "40364389",
-    "prob_bc": 0.357,
-    "predicted_points": 10.0,
-    "top_reasons": [
-      "Last points: 10",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6785714285714286,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5785714285714286,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.47857142857142854,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364443": {
-    "camis": "40364443",
-    "prob_bc": 0.857,
-    "predicted_points": 24.0,
-    "top_reasons": [
-      "Last points: 24",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.9,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.8,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.6,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364449": {
-    "camis": "40364449",
-    "prob_bc": 0.429,
-    "predicted_points": 12.0,
-    "top_reasons": [
-      "Last points: 12",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7142857142857143,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6142857142857143,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5142857142857142,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364467": {
-    "camis": "40364467",
-    "prob_bc": 0.143,
-    "predicted_points": 4.0,
-    "top_reasons": [
-      "Last points: 4",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.5714285714285714,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.4714285714285714,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.37142857142857144,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364518": {
-    "camis": "40364518",
-    "prob_bc": 0.357,
-    "predicted_points": 10.0,
-    "top_reasons": [
-      "Last points: 10",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6785714285714286,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5785714285714286,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.47857142857142854,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364531": {
-    "camis": "40364531",
-    "prob_bc": 0.321,
-    "predicted_points": 9.0,
-    "top_reasons": [
-      "Last points: 9",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6607142857142857,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5607142857142857,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.46071428571428574,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364744": {
-    "camis": "40364744",
-    "prob_bc": 0.464,
-    "predicted_points": 13.0,
-    "top_reasons": [
-      "Last points: 13",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7321428571428572,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6321428571428571,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5321428571428571,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40364956": {
-    "camis": "40364956",
-    "prob_bc": 0.429,
-    "predicted_points": 12.0,
-    "top_reasons": [
-      "Last points: 12",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7142857142857143,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6142857142857143,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5142857142857142,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365075": {
-    "camis": "40365075",
-    "prob_bc": 0.429,
-    "predicted_points": 12.0,
-    "top_reasons": [
-      "Last points: 12",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7142857142857143,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6142857142857143,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5142857142857142,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365166": {
-    "camis": "40365166",
-    "prob_bc": 0.357,
-    "predicted_points": 10.0,
-    "top_reasons": [
-      "Last points: 10",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6785714285714286,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5785714285714286,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.47857142857142854,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365499": {
-    "camis": "40365499",
-    "prob_bc": 0.429,
-    "predicted_points": 12.0,
-    "top_reasons": [
-      "Last points: 12",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7142857142857143,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6142857142857143,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5142857142857142,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365546": {
-    "camis": "40365546",
-    "prob_bc": 0.464,
-    "predicted_points": 13.0,
-    "top_reasons": [
-      "Last points: 13",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.7321428571428572,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.6321428571428571,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5321428571428571,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365632": {
-    "camis": "40365632",
-    "prob_bc": 0.393,
-    "predicted_points": 11.0,
-    "top_reasons": [
-      "Last points: 11",
-      "Consistent A history"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.6964285714285714,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.5964285714285714,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.49642857142857144,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
-  },
-  "40365841": {
-    "camis": "40365841",
-    "prob_bc": 0.95,
     "predicted_points": 34.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710385019609",
+    "name": "Amul",
+    "area": "Ahmedabad",
+    "latitude": 23.0116852,
+    "longitude": 72.568823,
+    "prob_fssai_fail": 0.44,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 34",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.9,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.53,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.8,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.6,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.35,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 44.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40365882": {
-    "camis": "40365882",
-    "prob_bc": 0.464,
-    "predicted_points": 13.0,
+  {
+    "fssai_id": "10786300662084",
+    "name": "Dinner Bell",
+    "area": "Ahmedabad",
+    "latitude": 23.0457522,
+    "longitude": 72.5524611,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 13",
-      "Recent temp/holding issues"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.7321428571428572,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.6321428571428571,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.5321428571428571,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40365904": {
-    "camis": "40365904",
-    "prob_bc": 0.0,
-    "predicted_points": 0.0,
+  {
+    "fssai_id": "10761978158477",
+    "name": "Havmor Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0376713,
+    "longitude": 72.565775,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "italian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 0",
-      "Consistent A history"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.5,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.4,
-        "label": "Evidence of mice"
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10739210710112",
+    "name": "Natural Ice Cream",
+    "area": "Law Garden Road",
+    "latitude": 23.0328812,
+    "longitude": 72.5655478,
+    "prob_fssai_fail": 0.38,
+    "cuisine": "ice_cream",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.46,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "10F",
+        "code": "Sch4.1.2",
         "probability": 0.3,
-        "label": "Personal cleanliness"
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 38.0,
+    "data_version": "real-osm-v1.1"
   },
-  "40365938": {
-    "camis": "40365938",
-    "prob_bc": 0.95,
+  {
+    "fssai_id": "10710800530408",
+    "name": "Agashiye Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0270378,
+    "longitude": 72.5816167,
+    "prob_fssai_fail": 0.2,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.24,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.16,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 20.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713660664454",
+    "name": "Food Temple",
+    "area": "GST Crossing",
+    "latitude": 23.0847638,
+    "longitude": 72.5647629,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10786844126992",
+    "name": "Black Salt",
+    "area": "Ahmedabad",
+    "latitude": 23.0523024,
+    "longitude": 72.4998803,
+    "prob_fssai_fail": 0.16,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.19,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.13,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 16.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10717185067900",
+    "name": "Green House Restaurant",
+    "area": "Opposite Sidi Saiyad Jali",
+    "latitude": 23.0272633,
+    "longitude": 72.5816108,
+    "prob_fssai_fail": 0.19,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.23,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.15,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 19.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10772195833501",
+    "name": "Vrundavan Restaurant;AKHBAR NAGAR CIRCLE",
+    "area": "Ahmedabad",
+    "latitude": 23.0674245,
+    "longitude": 72.5645716,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Punjabi,_SouthIndia,_Gujarati Thali.",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10717302591181",
+    "name": "Real Paprika",
+    "area": "Nehrunagar",
+    "latitude": 23.0212619,
+    "longitude": 72.543503,
+    "prob_fssai_fail": 0.47,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.56,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 47.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714333804909",
+    "name": "Gol Limbda Bhajiya and Nashta House",
+    "area": "Ahmedabad",
+    "latitude": 23.0200882,
+    "longitude": 72.5860331,
+    "prob_fssai_fail": 0.39,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.47,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.31,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 39.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714971262679",
+    "name": "Barbeque Nation",
+    "area": "Ahmedabad",
+    "latitude": 23.0480405,
+    "longitude": 72.526862,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711038636549",
+    "name": "Shreeji krupa vadapav",
+    "area": "Ahmedabad",
+    "latitude": 23.0423379,
+    "longitude": 72.549193,
+    "prob_fssai_fail": 0.38,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.46,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.3,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 38.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10790302643768",
+    "name": "McDonald's",
+    "area": "120 Feet Ring Road",
+    "latitude": 23.0423816,
+    "longitude": 72.5486525,
+    "prob_fssai_fail": 0.18,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.22,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 18.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10738011382288",
+    "name": "Asharfilal Kulfi",
+    "area": "120 Feet Ring Road",
+    "latitude": 23.0426757,
+    "longitude": 72.5492422,
+    "prob_fssai_fail": 0.16,
+    "cuisine": "ice_cream",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.19,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.13,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 16.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10774013532068",
+    "name": "Lucky Tea Shop",
+    "area": "Ahmedabad",
+    "latitude": 23.027562,
+    "longitude": 72.5811204,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711655107705",
+    "name": "Naeeka",
+    "area": "Ahmedabad",
+    "latitude": 23.0552316,
+    "longitude": 72.5908571,
+    "prob_fssai_fail": 0.43,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.52,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.34,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 43.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715064630753",
+    "name": "Nishat",
+    "area": "Ahmedabad",
+    "latitude": 23.0248713,
+    "longitude": 72.5829376,
+    "prob_fssai_fail": 0.19,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.23,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.15,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 19.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10768553326879",
+    "name": "Nishat",
+    "area": "Ahmedabad",
+    "latitude": 23.0248607,
+    "longitude": 72.5830856,
+    "prob_fssai_fail": 0.39,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.47,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.31,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 39.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10765347934936",
+    "name": "Paramount",
+    "area": "Ahmedabad",
+    "latitude": 23.0245678,
+    "longitude": 72.5823659,
+    "prob_fssai_fail": 0.27,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.32,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 27.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10738886697224",
+    "name": "Jasuben Pizza",
+    "area": "Ahmedabad",
+    "latitude": 23.0206812,
+    "longitude": 72.5540845,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10712402894205",
+    "name": "MAHARAJ Food Corner",
+    "area": "Ahmedabad",
+    "latitude": 23.0839448,
+    "longitude": 72.5892158,
+    "prob_fssai_fail": 0.47,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.56,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 47.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10738158765581",
+    "name": "waah",
+    "area": "Ahmedabad",
+    "latitude": 23.0342579,
+    "longitude": 72.5609251,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10755518346726",
+    "name": "havmor",
+    "area": "Ahmedabad",
+    "latitude": 23.0342641,
+    "longitude": 72.5608446,
+    "prob_fssai_fail": 0.42,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.5,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.34,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 42.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10761282328234",
+    "name": "choice",
+    "area": "Ahmedabad",
+    "latitude": 23.0344517,
+    "longitude": 72.5612536,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10755584839144",
+    "name": "purohit",
+    "area": "Ahmedabad",
+    "latitude": 23.0342345,
+    "longitude": 72.5610096,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
     "predicted_points": 28.0,
-    "top_reasons": [
-      "Last points: 28",
-      "Recent temp/holding issues"
-    ],
-    "top_violation_probs": [
-      {
-        "code": "04M",
-        "probability": 0.9,
-        "label": "Food not held at proper temp"
-      },
-      {
-        "code": "04L",
-        "probability": 0.8,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.6,
-        "label": "Personal cleanliness"
-      }
-    ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "data_version": "real-osm-v1.1"
   },
-  "40366002": {
-    "camis": "40366002",
-    "prob_bc": 0.357,
-    "predicted_points": 10.0,
+  {
+    "fssai_id": "10748348937726",
+    "name": "Honest",
+    "area": "Ahmedabad",
+    "latitude": 23.0385865,
+    "longitude": 72.5126614,
+    "prob_fssai_fail": 0.2,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
     "top_reasons": [
-      "Last points: 10",
-      "Consistent A history"
+      "Historical compliance pattern",
+      "Area density index"
     ],
     "top_violation_probs": [
       {
-        "code": "04M",
-        "probability": 0.6785714285714286,
-        "label": "Food not held at proper temp"
+        "code": "Sch4.2.1",
+        "probability": 0.24,
+        "label": "Equipment Maintenance & Cleanliness"
       },
       {
-        "code": "04L",
-        "probability": 0.5785714285714286,
-        "label": "Evidence of mice"
-      },
-      {
-        "code": "10F",
-        "probability": 0.47857142857142854,
-        "label": "Personal cleanliness"
+        "code": "Sch4.1.2",
+        "probability": 0.16,
+        "label": "Food Storage Conditions"
       }
     ],
-    "model_version": "0.1.0",
-    "data_version": "demo-seed"
+    "predicted_points": 20.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10742370141394",
+    "name": "Subway",
+    "area": "Ahmedabad",
+    "latitude": 23.0385075,
+    "longitude": 72.512884,
+    "prob_fssai_fail": 0.29,
+    "cuisine": "sandwich",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.35,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.23,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 29.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10754981077702",
+    "name": "McDonald's",
+    "area": "Ahmedabad",
+    "latitude": 23.0244178,
+    "longitude": 72.507327,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10733762344146",
+    "name": "Havmor",
+    "area": "Ahmedabad",
+    "latitude": 23.0381817,
+    "longitude": 72.5122645,
+    "prob_fssai_fail": 0.15,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.18,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.12,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 15.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714032450111",
+    "name": "TGB",
+    "area": "Ashram Road",
+    "latitude": 23.005805,
+    "longitude": 72.5552881,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716842412774",
+    "name": "Domino's",
+    "area": "Ahmedabad",
+    "latitude": 23.051025,
+    "longitude": 72.64396,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10746701377698",
+    "name": "TGB",
+    "area": "Ahmedabad",
+    "latitude": 23.0510167,
+    "longitude": 72.64456,
+    "prob_fssai_fail": 0.31,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.37,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.25,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 31.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714947822558",
+    "name": "Spoons n straws",
+    "area": "NH8",
+    "latitude": 23.0512085,
+    "longitude": 72.643756,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10732597599133",
+    "name": "McDonald's",
+    "area": "Ahmedabad",
+    "latitude": 23.0142097,
+    "longitude": 72.597377,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716772152497",
+    "name": "Subway",
+    "area": "Ahmedabad",
+    "latitude": 23.0464898,
+    "longitude": 72.5294517,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715297545094",
+    "name": "Atithi Dining Hall",
+    "area": "Ahmedabad",
+    "latitude": 23.0381074,
+    "longitude": 72.5138086,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10758401136492",
+    "name": "Sabri Kathiyavadi,panjabi",
+    "area": "Dmart road / nikol naroda road",
+    "latitude": 23.0591783,
+    "longitude": 72.6708433,
+    "prob_fssai_fail": 0.17,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.2,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 17.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10788517717089",
+    "name": "AFC Garden Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.111054,
+    "longitude": 72.6050699,
+    "prob_fssai_fail": 0.43,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.52,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.34,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 43.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710477734026",
+    "name": "Kabir Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0795581,
+    "longitude": 72.6690656,
+    "prob_fssai_fail": 0.35,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.42,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.28,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 35.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10783524337752",
+    "name": "arbi",
+    "area": "Ahmedabad",
+    "latitude": 23.030136,
+    "longitude": 72.600163,
+    "prob_fssai_fail": 0.21,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.25,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.17,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 21.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716729687082",
+    "name": "Cooking Culture",
+    "area": "Ahmedabad",
+    "latitude": 23.035392,
+    "longitude": 72.5065,
+    "prob_fssai_fail": 0.24,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.29,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.19,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 24.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10776758597653",
+    "name": "HANDI HOTEL",
+    "area": "Ahmedabad",
+    "latitude": 23.0659846,
+    "longitude": 72.5827993,
+    "prob_fssai_fail": 0.15,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.18,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.12,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 15.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713050723261",
+    "name": "Little Italy",
+    "area": "Ahmedabad",
+    "latitude": 23.0324134,
+    "longitude": 72.5082222,
+    "prob_fssai_fail": 0.15,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.18,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.12,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 15.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10744014926170",
+    "name": "Tandoorworkz",
+    "area": "Chimanlal Girdharlal Road",
+    "latitude": 23.0199957,
+    "longitude": 72.5580704,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "burger;sandwich;regional;ice_cream;grill;cake;coffee_shop;pasta;noodles;pancake;pizza;chicken;fish_and_chips;curry;indian;fish;breakfast;savory_pancakes;tea;seafood;sausage;local;barbecue",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716070748332",
+    "name": "Annapurna",
+    "area": "Ahmedabad",
+    "latitude": 22.9818481,
+    "longitude": 72.6317943,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715982494455",
+    "name": "Gayatri",
+    "area": "Ahmedabad",
+    "latitude": 22.9811933,
+    "longitude": 72.6319432,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10717757418887",
+    "name": "Royal Pride",
+    "area": "Ahmedabad",
+    "latitude": 22.9815706,
+    "longitude": 72.6329291,
+    "prob_fssai_fail": 0.32,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.38,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.26,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 32.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10717220497983",
+    "name": "nilam snacks",
+    "area": "Ahmedabad",
+    "latitude": 23.0550362,
+    "longitude": 72.5398877,
+    "prob_fssai_fail": 0.24,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.29,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.19,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 24.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10754889266969",
+    "name": "Tan-man bhaji pav",
+    "area": "tanman chokdi",
+    "latitude": 23.0071778,
+    "longitude": 72.6638136,
+    "prob_fssai_fail": 0.31,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.37,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.25,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 31.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710532947045",
+    "name": "Upper Crest",
+    "area": "Ahmedabad",
+    "latitude": 23.0168753,
+    "longitude": 72.4703195,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711644867562",
+    "name": "Subway",
+    "area": "Ahmedabad",
+    "latitude": 23.0422816,
+    "longitude": 72.549183,
+    "prob_fssai_fail": 0.37,
+    "cuisine": "sandwich",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.44,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.3,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 37.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10785417468262",
+    "name": "Iscon Ghantiya",
+    "area": "Ahmedabad",
+    "latitude": 23.0398379,
+    "longitude": 72.5276503,
+    "prob_fssai_fail": 0.47,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.56,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 47.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10777864405382",
+    "name": "Hotel Purohit Por",
+    "area": "Ahmedabad",
+    "latitude": 22.9945198,
+    "longitude": 72.665834,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10769306868443",
+    "name": "Havmor restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0287895,
+    "longitude": 72.4775187,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10747764779065",
+    "name": "Hotel Emerland",
+    "area": "Kotar pur-airport road",
+    "latitude": 23.0742871,
+    "longitude": 72.6506214,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10758269006233",
+    "name": "Sanmani Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0236978,
+    "longitude": 72.5995018,
+    "prob_fssai_fail": 0.29,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.35,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.23,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 29.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710029580567",
+    "name": "Takshshila Food Court",
+    "area": "Ahmedabad",
+    "latitude": 23.0275402,
+    "longitude": 72.559229,
+    "prob_fssai_fail": 0.17,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.2,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 17.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716599934463",
+    "name": "Jai Jalaram Parontha House",
+    "area": "Ahmedabad",
+    "latitude": 23.0246356,
+    "longitude": 72.5714777,
+    "prob_fssai_fail": 0.42,
+    "cuisine": "gujarati;kathiawari;punjabi",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.5,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.34,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 42.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10764612918972",
+    "name": "Jalaram Parotha house",
+    "area": "Ambli Bopal Road",
+    "latitude": 23.0284866,
+    "longitude": 72.4766561,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711335073131",
+    "name": "Chicken biryani",
+    "area": "Ahmedabad",
+    "latitude": 23.0169709,
+    "longitude": 72.5835893,
+    "prob_fssai_fail": 0.41,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.49,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.33,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 41.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10778249313701",
+    "name": "K.G.N. Chinese Fry Centre",
+    "area": "Ahmedabad",
+    "latitude": 23.0197975,
+    "longitude": 72.5838568,
+    "prob_fssai_fail": 0.26,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.31,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.21,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 26.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713656656275",
+    "name": "Himalaya Bakery",
+    "area": "Ahmedabad",
+    "latitude": 22.9798046,
+    "longitude": 72.5737246,
+    "prob_fssai_fail": 0.16,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.19,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.13,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 16.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715375888159",
+    "name": "McDonald's",
+    "area": "Ahmedabad",
+    "latitude": 23.0221413,
+    "longitude": 72.5567513,
+    "prob_fssai_fail": 0.34,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.41,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.27,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 34.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710730716816",
+    "name": "Hocco Eatery",
+    "area": "200ft. Gala Gymkhana Road",
+    "latitude": 23.0175789,
+    "longitude": 72.4750517,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714640509479",
+    "name": "Swati Snacks",
+    "area": "Ahmedabad",
+    "latitude": 23.0244466,
+    "longitude": 72.5589826,
+    "prob_fssai_fail": 0.22,
+    "cuisine": "Gujarati;regional",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.26,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 22.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10734192267541",
+    "name": "Babadeepsingh Restaurant",
+    "area": "opp. Satva Green Party Plot, Nr. Ring Road Circle Hanspura, Naroda - Dahegam Road",
+    "latitude": 23.0875162,
+    "longitude": 72.683768,
+    "prob_fssai_fail": 0.34,
+    "cuisine": "indian;regional;asian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.41,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.27,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 34.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713137475635",
+    "name": "Diwan Bhel Pakodi Center",
+    "area": "Shivalay Apartment 2",
+    "latitude": 23.0163696,
+    "longitude": 72.5248026,
+    "prob_fssai_fail": 0.22,
+    "cuisine": "regional;indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.26,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 22.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710058029216",
+    "name": "Jagdish Chaat Pakodi Center",
+    "area": "Nandanvan 3",
+    "latitude": 23.0163966,
+    "longitude": 72.5243683,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "regional;indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711085102404",
+    "name": "Sambar Cafe",
+    "area": "Ahmedabad",
+    "latitude": 23.0333924,
+    "longitude": 72.4354163,
+    "prob_fssai_fail": 0.22,
+    "cuisine": "indian;southindian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.26,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 22.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10773435379369",
+    "name": "Domino's",
+    "area": "132 Ft. Ring Road",
+    "latitude": 23.0172744,
+    "longitude": 72.5299212,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10752952293972",
+    "name": "La Milano Pizzeria Prahladnagar",
+    "area": "Opp Prahladnagar Garden",
+    "latitude": 23.0116205,
+    "longitude": 72.5052184,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10775327354255",
+    "name": "McDonald's",
+    "area": "Sardar Patel Ring Road",
+    "latitude": 23.0258612,
+    "longitude": 72.4762382,
+    "prob_fssai_fail": 0.38,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.46,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.3,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 38.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10781901001268",
+    "name": "McDonald's",
+    "area": "100 Ft. Road",
+    "latitude": 23.0123743,
+    "longitude": 72.511119,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10756678820908",
+    "name": "Gordhan Thal",
+    "area": "Shapath Tower Ground Floor Sarkhej Gandhi Nagar Highway, Near State Bank Of India, Thaltej",
+    "latitude": 23.0359596,
+    "longitude": 72.5111196,
+    "prob_fssai_fail": 0.29,
+    "cuisine": "gujarati;regional;indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.35,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.23,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 29.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10743192785362",
+    "name": "Deva's Coffee Bar",
+    "area": "Ahmedabad",
+    "latitude": 23.0361967,
+    "longitude": 72.5110489,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "pizza;burger;sandwich;fast_food;tea_shop;juice",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716176446783",
+    "name": "Shreeji Krupa Bombay Vadapav",
+    "area": "Sargam Marg, Nehru Park Cir, Mahavir Nagar society, Vastrapur, Ahmedabad, Gujarat 380015",
+    "latitude": 23.0371443,
+    "longitude": 72.5290405,
+    "prob_fssai_fail": 0.44,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.53,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.35,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 44.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10774910726687",
+    "name": "Gajanand Pauva House",
+    "area": "Sargam Marg, Nehru Park Cir, Mahavir Nagar society, Vastrapur, Ahmedabad, Gujarat 380015",
+    "latitude": 23.0371776,
+    "longitude": 72.5291086,
+    "prob_fssai_fail": 0.21,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.25,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.17,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 21.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10783201436602",
+    "name": "Jay Mataji Fast Food",
+    "area": "Sargam Marg, Nehru Park Cir, Mahavir Nagar society, Vastrapur, Ahmedabad, Gujarat 380015",
+    "latitude": 23.0371316,
+    "longitude": 72.5290981,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716721405459",
+    "name": "Purohit Chavana and Sweet Mart",
+    "area": "Ahmedabad",
+    "latitude": 23.0182853,
+    "longitude": 72.4716006,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715983407566",
+    "name": "Puffiza",
+    "area": "Ahmedabad",
+    "latitude": 23.0276271,
+    "longitude": 72.5588748,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10717398374734",
+    "name": "Skyz Restaurant and Banquet",
+    "area": "100 ft. Road, Prahaladnagar",
+    "latitude": 23.0116726,
+    "longitude": 72.5081733,
+    "prob_fssai_fail": 0.26,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.31,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.21,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 26.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10789323314394",
+    "name": "The Waffling Station",
+    "area": "H.L Commerce College Rd, Navrangpara",
+    "latitude": 23.0322805,
+    "longitude": 72.5551823,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "dessert;waffles;shakes;cold_coffee",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10799613118866",
+    "name": "The Grill Street",
+    "area": "Dev Arc Commercial Complex, 106, Iskcon Cross Rd, Near iscon cross road, Ramdev Nagar,",
+    "latitude": 23.0267886,
+    "longitude": 72.5079662,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710708328923",
+    "name": "The House of Khaman",
+    "area": "Navrangpura",
+    "latitude": 23.0396084,
+    "longitude": 72.5644073,
+    "prob_fssai_fail": 0.2,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.24,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.16,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 20.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10798745619847",
+    "name": "Bhookh Lagi Hai?",
+    "area": "Ahmedabad",
+    "latitude": 23.0218092,
+    "longitude": 72.5062361,
+    "prob_fssai_fail": 0.49,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.59,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.39,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 49.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10751795856981",
+    "name": "Gwalia Sweets",
+    "area": "Ahmedabad",
+    "latitude": 23.017434,
+    "longitude": 72.4756286,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10722124376506",
+    "name": "Jassi De Parathe",
+    "area": "100 Feet, Anandnagar Road,",
+    "latitude": 23.0123617,
+    "longitude": 72.5110318,
+    "prob_fssai_fail": 0.2,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.24,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.16,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 20.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10792075202232",
+    "name": "leela sandwich",
+    "area": "Ahmedabad",
+    "latitude": 23.0407863,
+    "longitude": 72.5275081,
+    "prob_fssai_fail": 0.36,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.43,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.29,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 36.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10712112931496",
+    "name": "Ramdev Farsan",
+    "area": "Ahmedabad",
+    "latitude": 23.1084228,
+    "longitude": 72.5824778,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711704963445",
+    "name": "Monginis Cake shop",
+    "area": "Ahmedabad",
+    "latitude": 23.1089422,
+    "longitude": 72.5912774,
+    "prob_fssai_fail": 0.47,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.56,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 47.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10744332307282",
+    "name": "Subway.",
+    "area": "Ahmedabad",
+    "latitude": 23.1035224,
+    "longitude": 72.5960745,
+    "prob_fssai_fail": 0.16,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.19,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.13,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 16.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715538309037",
+    "name": "The Belgian Waffle",
+    "area": "Ahmedabad",
+    "latitude": 23.1096267,
+    "longitude": 72.5938416,
+    "prob_fssai_fail": 0.24,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.29,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.19,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 24.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713616790790",
+    "name": "Tandoor & Tadka",
+    "area": "Ahmedabad",
+    "latitude": 23.1096095,
+    "longitude": 72.5942231,
+    "prob_fssai_fail": 0.18,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.22,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 18.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10786167605263",
+    "name": "La Pino's Pizza.",
+    "area": "Ahmedabad",
+    "latitude": 23.1034803,
+    "longitude": 72.5961933,
+    "prob_fssai_fail": 0.17,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.2,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 17.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10726296838941",
+    "name": "Dangee Dums",
+    "area": "Ahmedabad",
+    "latitude": 23.1056688,
+    "longitude": 72.5957957,
+    "prob_fssai_fail": 0.33,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.4,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.26,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 33.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10739761478477",
+    "name": "La Milano Pizzeria.",
+    "area": "Ahmedabad",
+    "latitude": 23.103377,
+    "longitude": 72.5958266,
+    "prob_fssai_fail": 0.37,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.44,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.3,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 37.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10751027803167",
+    "name": "Gwalia Sweets Private Limited",
+    "area": "Ahmedabad",
+    "latitude": 23.102916,
+    "longitude": 72.5952916,
+    "prob_fssai_fail": 0.27,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.32,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 27.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710334072768",
+    "name": "BLUEBERRY RESTAURANT & BANQUET",
+    "area": "Aarth Business Center, Ring Road, opp. Torrent Sub-Station, Nikol",
+    "latitude": 23.0416984,
+    "longitude": 72.6784893,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "chinese;pizza;coffee_shop",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713297026912",
+    "name": "Sakha Surti Locho & Rasawala Khaman",
+    "area": "Ahmedabad",
+    "latitude": 22.9782788,
+    "longitude": 72.6106967,
+    "prob_fssai_fail": 0.31,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.37,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.25,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 31.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716481141963",
+    "name": "Dosawala",
+    "area": "Ahmedabad",
+    "latitude": 23.0681879,
+    "longitude": 72.576195,
+    "prob_fssai_fail": 0.25,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.3,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.2,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 25.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714823015994",
+    "name": "1944 The Hocco Kitchen",
+    "area": "Ahmedabad",
+    "latitude": 23.0381383,
+    "longitude": 72.6772579,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "pizza;regional;italian;burger;chinese;sandwich;mexican;kebab;indian;ice_cream;international",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716924814168",
+    "name": "Dinchuiliu Vidhani Kitchen",
+    "area": "B-Ward, Kubernagar",
+    "latitude": 23.0721192,
+    "longitude": 72.6421901,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10765822618769",
+    "name": "HL Frankie",
+    "area": "Safal Parisar Road",
+    "latitude": 23.0162491,
+    "longitude": 72.4646557,
+    "prob_fssai_fail": 0.19,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.23,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.15,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 19.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711413326649",
+    "name": "Hotel Sarvottam",
+    "area": "Sanand Sarkhej Road, Gibpura",
+    "latitude": 22.9853909,
+    "longitude": 72.4188332,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10775151546531",
+    "name": "Honest Restaurant",
+    "area": "Ahmedabad",
+    "latitude": 23.0309116,
+    "longitude": 72.4650527,
+    "prob_fssai_fail": 0.32,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.38,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.26,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 32.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10742587090376",
+    "name": "Pizza Hut",
+    "area": "Ahmedabad",
+    "latitude": 23.0267125,
+    "longitude": 72.4769539,
+    "prob_fssai_fail": 0.21,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.25,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.17,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 21.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711542056374",
+    "name": "Timtim",
+    "area": "Ahmedabad",
+    "latitude": 23.0362706,
+    "longitude": 72.5034854,
+    "prob_fssai_fail": 0.26,
+    "cuisine": "asian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.31,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.21,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 26.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10758319468537",
+    "name": "Prakash Bhojnalaya",
+    "area": "Ahmedabad",
+    "latitude": 23.078011,
+    "longitude": 72.5901382,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10783285510854",
+    "name": "Sri Udupi",
+    "area": "Ahmedabad",
+    "latitude": 23.0499932,
+    "longitude": 72.4992539,
+    "prob_fssai_fail": 0.47,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.56,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 47.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711183759443",
+    "name": "Shriji Bombay Vada Pav",
+    "area": "Ahmedabad",
+    "latitude": 23.0298827,
+    "longitude": 72.4746282,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10770541833816",
+    "name": "McDonald's",
+    "area": "Ahmedabad",
+    "latitude": 23.0218259,
+    "longitude": 72.55691,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10735877704987",
+    "name": "Burger King",
+    "area": "Ahmedabad",
+    "latitude": 23.0217347,
+    "longitude": 72.5569853,
+    "prob_fssai_fail": 0.23,
+    "cuisine": "burger",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.28,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 23.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10786109012292",
+    "name": "Taco Bell",
+    "area": "Ahmedabad",
+    "latitude": 23.0217891,
+    "longitude": 72.5569528,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "tex-mex",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10731215333987",
+    "name": "KFC",
+    "area": "Ahmedabad",
+    "latitude": 23.0216444,
+    "longitude": 72.5570471,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "chicken",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713381299776",
+    "name": "Shri Maruti Nandan",
+    "area": "Ahmedabad",
+    "latitude": 23.0216852,
+    "longitude": 72.5570151,
+    "prob_fssai_fail": 0.17,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.2,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 17.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10767660950854",
+    "name": "Open air food market",
+    "area": "Ahmedabad",
+    "latitude": 23.0233074,
+    "longitude": 72.588879,
+    "prob_fssai_fail": 0.25,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.3,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.2,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 25.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10780025600654",
+    "name": "Domino's",
+    "area": "Ahmedabad",
+    "latitude": 22.9912301,
+    "longitude": 72.6323612,
+    "prob_fssai_fail": 0.15,
+    "cuisine": "pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.18,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.12,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 15.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10768291359714",
+    "name": "Canteen",
+    "area": "Ahmedabad",
+    "latitude": 23.0112367,
+    "longitude": 72.5690552,
+    "prob_fssai_fail": 0.48,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.58,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.38,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 48.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10731650693119",
+    "name": "Students Mess",
+    "area": "Ahmedabad",
+    "latitude": 23.0089219,
+    "longitude": 72.5704264,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713195311820",
+    "name": "Patang - The Revolving Restaurant",
+    "area": "Nehru Bridge",
+    "latitude": 23.026352,
+    "longitude": 72.5721737,
+    "prob_fssai_fail": 0.21,
+    "cuisine": "multicuisine",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.25,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.17,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 21.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711859237205",
+    "name": "@Mango",
+    "area": "Ahmedabad",
+    "latitude": 23.0400297,
+    "longitude": 72.5020608,
+    "prob_fssai_fail": 0.46,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.55,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.37,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 46.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711085004307",
+    "name": "chocolate room",
+    "area": "Ahmedabad",
+    "latitude": 23.0344702,
+    "longitude": 72.5611866,
+    "prob_fssai_fail": 0.35,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.42,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.28,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 35.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10716332173865",
+    "name": "waah",
+    "area": "Ahmedabad",
+    "latitude": 23.0342326,
+    "longitude": 72.5610089,
+    "prob_fssai_fail": 0.45,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.54,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.36,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 45.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10762255665132",
+    "name": "purohit",
+    "area": "Ahmedabad",
+    "latitude": 23.0342154,
+    "longitude": 72.5610967,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10713642270346",
+    "name": "havmore",
+    "area": "Ahmedabad",
+    "latitude": 23.0342648,
+    "longitude": 72.5608419,
+    "prob_fssai_fail": 0.29,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.35,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.23,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 29.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10756003229858",
+    "name": "Kathiyawadi",
+    "area": "Nikol-Nava Naroda road",
+    "latitude": 23.0581169,
+    "longitude": 72.6719773,
+    "prob_fssai_fail": 0.18,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.22,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.14,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 18.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10715371477678",
+    "name": "Pharma Canteen(F1)",
+    "area": "Ahmedabad",
+    "latitude": 23.1282802,
+    "longitude": 72.5473164,
+    "prob_fssai_fail": 0.42,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.5,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.34,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 42.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10710069986454",
+    "name": "Law Canteen(F2)",
+    "area": "Ahmedabad",
+    "latitude": 23.1271067,
+    "longitude": 72.5450506,
+    "prob_fssai_fail": 0.28,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.34,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.22,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 28.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711633073075",
+    "name": "Hotel Emerland",
+    "area": "Rakhiyal Road SH-68",
+    "latitude": 23.0741383,
+    "longitude": 72.650781,
+    "prob_fssai_fail": 0.16,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.19,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.13,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 16.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10793334816162",
+    "name": "Parth Flavour",
+    "area": "Ashram Road",
+    "latitude": 23.0483244,
+    "longitude": 72.5713265,
+    "prob_fssai_fail": 0.22,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.26,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 22.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10712671404102",
+    "name": "Prince Bhaji Pav",
+    "area": "Ahmedabad",
+    "latitude": 22.9949985,
+    "longitude": 72.6050299,
+    "prob_fssai_fail": 0.38,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.46,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.3,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 38.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711221427165",
+    "name": "Honest Khoda",
+    "area": "Sanand-Viramgam Highway",
+    "latitude": 23.0305837,
+    "longitude": 72.2964209,
+    "prob_fssai_fail": 0.23,
+    "cuisine": "indian;pizza",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.28,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.18,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 23.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10723764209569",
+    "name": "Kamla Cafe",
+    "area": "Ahmedabad",
+    "latitude": 23.0442392,
+    "longitude": 72.5175621,
+    "prob_fssai_fail": 0.31,
+    "cuisine": "indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.37,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.25,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 31.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10711215149758",
+    "name": "Praful Dairy Parlour",
+    "area": "Ahmedabad",
+    "latitude": 23.1065269,
+    "longitude": 72.5760501,
+    "prob_fssai_fail": 0.4,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.48,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.32,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 40.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10743378279896",
+    "name": "Curry Tree",
+    "area": "Ahmedabad",
+    "latitude": 23.0757115,
+    "longitude": 72.6237907,
+    "prob_fssai_fail": 0.3,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.36,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.24,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 30.0,
+    "data_version": "real-osm-v1.1"
+  },
+  {
+    "fssai_id": "10714480304364",
+    "name": "Under the Neem Trees",
+    "area": "Ahmedabad",
+    "latitude": 23.0322626,
+    "longitude": 72.5049551,
+    "prob_fssai_fail": 0.32,
+    "cuisine": "Indian",
+    "last_inspection_date": "2024-04-10",
+    "top_reasons": [
+      "Historical compliance pattern",
+      "Area density index"
+    ],
+    "top_violation_probs": [
+      {
+        "code": "Sch4.2.1",
+        "probability": 0.38,
+        "label": "Equipment Maintenance & Cleanliness"
+      },
+      {
+        "code": "Sch4.1.2",
+        "probability": 0.26,
+        "label": "Food Storage Conditions"
+      }
+    ],
+    "predicted_points": 32.0,
+    "data_version": "real-osm-v1.1"
   }
-}
+]

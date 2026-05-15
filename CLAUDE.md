@@ -1,33 +1,29 @@
-# DineSafe NYC — Health Inspection Compliance Coach
+# Health Inspection Coach — Ahmedabad
 
 ## What it does
 
-Given a restaurant's CAMIS ID (NYC's unique restaurant identifier), the API returns:
-- Probability of getting a B or C grade on the next inspection (`prob_bc`)
-- Predicted violation score (points)
-- Top likely violation categories with probabilities
-- A "rat pressure index" — geospatial measure of nearby rodent complaints and failed city rat inspections
-
-Live API: https://health-inspection-compliance-coach-production.up.railway.app  
-Swagger docs: https://health-inspection-compliance-coach-production.up.railway.app/docs
+Given a restaurant's FSSAI license ID (India's Food Safety and Standards Authority identifier), the API returns:
+- Probability of failing the next FSSAI inspection (`prob_fssai_fail`)
+- Predicted violation point total
+- Top likely FSSAI Schedule 4 violation categories with probabilities
+- An "environmental index" — real-time geospatial measure of nearby risk factors (markets, transit hubs, construction) via Google Places API
 
 ---
 
 ## Tech stack
 
-- **FastAPI** backend, deployed on **Google Cloud Run** (serverless, scale-to-zero)
-- Data stored as **Parquet files** (Pandas + PyArrow), baked into the Docker image as a cold-start fallback
-- **H3 hexagonal grid** for geospatial rat pressure aggregation
-- **Nightly ETL** via Cloud Scheduler pulling fresh data from NYC Open Data (Socrata API)
+- **FastAPI** backend
+- **httpx** for async HTTP calls to Google Places Nearby Search API (v1)
+- **Demo seed data** — 15 pre-seeded Ahmedabad restaurants in `data/demo_seed.json`
 - Python 3.11, Uvicorn, Pydantic v2
 
 ---
 
 ## Data pipeline
 
-1. `etl/nyc_inspections_etl.py` — fetches NYC restaurant inspection records → `data/parquet/inspections_raw.parquet`
-2. `etl/rodent_index.py` — fetches 311 rodent complaints + DOHMH rat inspections → builds `data/parquet/rat_index.parquet` using H3 hex cells (res 9 ≈ 150–200m)
-3. `etl/feature_engineering.py` — pre-seeds 25 example restaurants → `data/demo_seed.json` for fast demo responses
+1. `etl/generate_ahmedabad_seed.py` — generates `data/demo_seed.json` with 15 Ahmedabad restaurants (FSSAI IDs, coordinates, base risk scores)
+2. `api/services/google_places_service.py` — real-time 200m radius search via Google Places for environmental risk factors
+3. `api/services/model_service.py` — combines seed data + environmental index into a risk score
 
 ---
 
@@ -35,14 +31,13 @@ Swagger docs: https://health-inspection-compliance-coach-production.up.railway.a
 
 ```
 api/
-├── main.py                  # FastAPI app, CORS, routers
-├── models.py                # Pydantic schemas
+├── main.py                              # FastAPI app, CORS, routers
+├── models.py                            # Pydantic schemas
 ├── routers/
-│   ├── score.py             # POST /score
-│   ├── search.py            # GET /search
-│   └── admin.py             # POST /admin/refresh, GET /admin/ratpeek, /admin/rawpeek
+│   └── score.py                         # POST /score
 └── services/
-    └── model_service.py     # ModelService: loads parquet, demo seed, LRU cache
+    ├── model_service.py                 # ModelService: loads seed, async scoring
+    └── google_places_service.py         # Google Places Nearby Search proxy
 ```
 
 ### Key endpoints
@@ -50,39 +45,30 @@ api/
 | Endpoint | Purpose |
 |---|---|
 | `GET /health` | Health check |
-| `GET /metadata` | App version and data window info |
-| `GET /search?name=` | Find restaurants by name (min 2 chars, up to 25 results) |
-| `POST /score` | Get risk prediction for a CAMIS |
-| `POST /admin/refresh` | Trigger full data refresh (requires `X-Admin-Token`) |
-| `GET /admin/ratpeek?camis=` | Debug rat features for a CAMIS |
-| `GET /admin/rawpeek?camis=` | Debug raw parquet for a CAMIS |
+| `GET /metadata` | App version and city info |
+| `POST /score` | Get FSSAI risk prediction for a restaurant |
 
 ---
 
 ## Scoring approach
 
-Currently **heuristic-based, not ML-trained**:
-- Derives `prob_bc` from a restaurant's last inspection score
-- Blends in rat pressure bump (up to ~12%) if local rodent activity is high
-- Boosts mice violation probability (code `04L`) when rat index is elevated
-- Falls back to `demo_seed.json` for the 25 pre-seeded restaurants; falls back to heuristic from parquet for all others
-- Structured to swap in a real ML model later (`models/dummy.joblib` placeholder)
+Heuristic-based (not ML-trained):
+- Derives `prob_fssai_fail` from a restaurant's base risk score (0–28 scale)
+- Blends in environmental penalty (up to +15%) based on nearby risk factors
+- Adjusts FSSAI Schedule 4 violation probabilities by environmental index
+- Uses mock environmental data when `MAPS_API_KEY` is not set
 
 ---
 
 ## Deployment
 
-- Docker image bakes parquet files for cold-start resilience
-- Runtime parquet written to `/tmp` (Cloud Run writable); image parquet at `/app/data/parquet` as fallback
-- Cloud Scheduler runs nightly at 03:00 UTC → calls `POST /admin/refresh`
+- Docker image includes only API code and seed data (no Parquet files)
+- Set `MAPS_API_KEY` environment variable for live Google Places integration
+- Falls back to deterministic mock data without API key
 
 ### Key environment variables
 
 | Var | Purpose |
 |---|---|
-| `FEATURE_STORE_DIR` | Runtime parquet directory (default `/tmp/data/parquet`) |
-| `BAKED_FEATURE_DIR` | Image-baked parquet fallback (default `/app/data/parquet`) |
-| `ADMIN_TOKEN` | Required for /admin endpoints |
-| `NYC_APP_TOKEN` | Socrata API token (higher rate limits) |
-| `RATS_DAYS_311` | Time window for 311 complaints (default 180 days) |
-| `RATS_DAYS_INSP` | Time window for rat inspections (default 365 days) |
+| `MAPS_API_KEY` | Google Places API key for live environmental risk assessment |
+| `DEMO_SEED_FILE` | Path to demo seed JSON (default `./data/demo_seed.json`) |

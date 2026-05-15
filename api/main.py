@@ -3,32 +3,28 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.routers.score import router as score_router
-from api.routers.search import router as search_router
-from api.routers.admin import router as admin_router
-from api.routers.neighborhood import router as neighborhood_router
-from api.routers.insights import router as insights_router
 
 app = FastAPI(
-    title="DineSafe NYC",
-    version="0.1.0",
+    title="Health Inspection Coach — Ahmedabad",
+    version="1.0.0",
     description="""
-Predict any NYC restaurant's next health inspection risk before the inspector shows up.
+Predict any Ahmedabad restaurant's FSSAI inspection risk before the inspector shows up.
 
-**Data source:** NYC Department of Health restaurant inspection records via NYC Open Data,
-refreshed nightly. ~30,000 restaurants, ~296,000 inspection records.
+**Data source:** 15 pre-seeded Ahmedabad restaurants with FSSAI license IDs.
+Environmental risk factors are assessed in real-time via Google Places Nearby Search
+within a 200-meter radius — checking for markets, transit hubs, and construction.
 
 **Key endpoints:**
-- `POST /score` — risk prediction for a restaurant (by CAMIS)
-- `GET /search` — find restaurants by name
-- `GET /neighborhood` — rank all restaurants in a zip code by inspection risk
-- `GET /insights` — citywide grade distribution and top-5 riskiest restaurants
-- `GET /metadata` — data freshness info
+- `POST /score` — risk prediction for a restaurant (by FSSAI license ID)
+- `GET /health` — health check
+- `GET /metadata` — app version info
 
-**Scoring:** heuristic-based (not ML-trained). Risk is derived from inspection history,
-score trend, borough baseline, critical violation rate, and local rodent pressure index.
+**Scoring:** heuristic-based. Risk is derived from base inspection history,
+environmental index (nearby risk factors), and FSSAI Schedule 4 violation probabilities.
 
-**Rat pressure index:** geospatial composite built from 311 rodent complaints and DOHMH
-rat inspection failures within ~150–200m of each restaurant, using H3 hex cells (resolution 9).
+**Environmental index:** real-time composite built from Google Places Nearby Search —
+counts of marketplaces, bus stations, transit stations, and construction sites
+within ~200m of each restaurant.
 """,
 )
 
@@ -81,14 +77,11 @@ def health():
 @app.get("/metadata")
 def metadata():
     return {
-        "model_version": "0.1.0",
-        "data_window_days": "1095",
-        "source": "NYC Open Data (inspections), nightly ETL",
+        "model_version": "ahmedabad-v1.0",
+        "city": "Ahmedabad, Gujarat, India",
+        "data_source": "FSSAI demo seed + Google Places Nearby Search (live)",
+        "restaurants_seeded": 15,
     }
 
 # Routers
 app.include_router(score_router, prefix="")
-app.include_router(search_router, prefix="")
-app.include_router(admin_router, prefix="")
-app.include_router(neighborhood_router, prefix="")
-app.include_router(insights_router, prefix="")

@@ -1,40 +1,50 @@
-# Dockerfile (at repo root)
+# --- Stage 1: Build Frontend ---
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ .
+# Set API URL to /api for production proxying
+ENV NEXT_PUBLIC_API_URL=/api
+RUN npm run build
+
+# --- Stage 2: Final Runtime ---
 FROM python:3.11-slim
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PORT=8080
-
 WORKDIR /app
 
-# OS deps (kept minimal)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl \
-  && rm -rf /var/lib/apt/lists/*
+# Install Node.js, Nginx, and envsubst
+RUN apt-get update && apt-get install -y \
+    curl \
+    nginx \
+    gettext-base \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
-# Python deps
-COPY api/requirements.txt /app/api/requirements.txt
-RUN pip install --no-cache-dir -r /app/api/requirements.txt \
-    && pip install --no-cache-dir requests h3
+# Copy Backend files and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# App code
-COPY api /app/api
-COPY etl /app/etl
-COPY data /app/data
+COPY api/ ./api/
+COPY data/ ./data/
 
-# Bake feature store (so we have a cold-start fallback)
-# Ensure you have these locally before building:
-#   data/parquet/rat_index.parquet
-#   data/parquet/inspections_raw.parquet
-RUN mkdir -p /app/data/parquet
-COPY data/parquet /app/data/parquet
+# Copy Frontend standalone build
+COPY --from=frontend-builder /app/frontend/.next/standalone ./frontend/
+COPY --from=frontend-builder /app/frontend/.next/static ./frontend/.next/static
+COPY --from=frontend-builder /app/frontend/public ./frontend/public
 
-# Environment defaults
-ENV BAKED_FEATURE_DIR="/app/data/parquet" \
-    BAKED_DEMO_SEED_FILE="/app/data/demo_seed.json" \
-    FEATURE_STORE_DIR="/tmp"
+# Setup Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf.template
+RUN rm /etc/nginx/sites-enabled/default
 
-EXPOSE 8080
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Setup Startup Script
+COPY start.sh .
+RUN chmod +x start.sh
 
+# Environment variables
+ENV PORT=10000
+ENV DEMO_SEED_FILE=./data/demo_seed.json
 
+EXPOSE 10000
+
+CMD ["./start.sh"]
