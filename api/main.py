@@ -98,11 +98,17 @@ async def proxy_frontend(path_name: str, request: Request):
         # Simple retry logic in case Next.js is still starting up
         for attempt in range(5):
             try:
+                # Strip headers that cause encoding/routing issues in proxying
+                req_headers = dict(request.headers)
+                req_headers.pop("accept-encoding", None)
+                req_headers.pop("host", None)
+                req_headers.pop("connection", None)
+
                 content = await request.body()
                 proxy_req = client.build_request(
                     method=request.method,
                     url=target_url,
-                    headers=request.headers.raw,
+                    headers=req_headers,
                     content=content,
                     params=request.query_params
                 )
