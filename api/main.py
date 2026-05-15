@@ -115,7 +115,8 @@ async def proxy_frontend(path_name: str, request: Request):
                 proxy_resp = await client.send(proxy_req, stream=True)
                 
                 # Sanitize headers (exclude hop-by-hop and content-length)
-                excluded = ["content-encoding", "content-length", "transfer-encoding", "connection", "keep-alive"]
+                # IMPORTANT: Keep 'content-encoding' so the browser knows if it's Gzip/Brotli
+                excluded = ["content-length", "transfer-encoding", "connection", "keep-alive"]
                 headers = {k: v for k, v in proxy_resp.headers.items() if k.lower() not in excluded}
                 
                 return StreamingResponse(
