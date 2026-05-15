@@ -4,7 +4,6 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ .
-# Set API URL to /api for production proxying
 ENV NEXT_PUBLIC_API_URL=/api
 RUN npm run build
 
@@ -12,16 +11,14 @@ RUN npm run build
 FROM python:3.11-slim
 WORKDIR /app
 
-# Install Node.js, Nginx, and envsubst
+# Install Node.js
 RUN apt-get update && apt-get install -y \
     curl \
-    nginx \
-    gettext-base \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy Backend files and install dependencies
+# Install Backend dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -33,11 +30,7 @@ COPY --from=frontend-builder /app/frontend/.next/standalone ./frontend/
 COPY --from=frontend-builder /app/frontend/.next/static ./frontend/.next/static
 COPY --from=frontend-builder /app/frontend/public ./frontend/public
 
-# Setup Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf.template
-RUN rm /etc/nginx/sites-enabled/default
-
-# Setup Startup Script and fix potential Windows line endings
+# Setup Startup Script
 COPY start.sh .
 RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 

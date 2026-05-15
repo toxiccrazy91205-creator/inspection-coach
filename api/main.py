@@ -1,6 +1,7 @@
-# api/main.py
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+import httpx
 
 from api.routers.score import router as score_router
 
@@ -85,3 +86,26 @@ def metadata():
 
 # Routers
 app.include_router(score_router, prefix="")
+
+# Catch-all proxy for the Frontend
+@app.api_route("/{path_name:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+async def proxy_frontend(path_name: str, request: Request):
+    target_url = f"http://localhost:3000/{path_name}"
+    
+    # Forward the request to Next.js
+    async with httpx.AsyncClient() as client:
+        content = await request.body()
+        proxy_req = client.build_request(
+            method=request.method,
+            url=target_url,
+            headers=request.headers.raw,
+            content=content,
+            params=request.query_params
+        )
+        proxy_resp = await client.send(proxy_req, stream=True)
+        
+        return StreamingResponse(
+            proxy_resp.aiter_raw(),
+            status_code=proxy_resp.status_code,
+            headers=dict(proxy_resp.headers)
+        )
